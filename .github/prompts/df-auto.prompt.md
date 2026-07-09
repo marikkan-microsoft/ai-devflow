@@ -1,0 +1,14 @@
+---
+mode: agent
+description: Run build→PR autonomously after one approval.
+---
+
+Follow the `autopilot` skill in this repository
+(`skills/autopilot/SKILL.md`).
+
+`${input:context}` may name the work slug or add context. Then:
+
+- Require an approved `spec.md` (or a confirmed bug) and a clean git baseline.
+- Take one approval gate, then run plan → build → verify → review → PR
+  autonomously, stopping only for blockers or irreversible steps.
+- End at a green open PR, route learnings to `compound-learnings`, and summarize.

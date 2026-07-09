@@ -1,0 +1,10 @@
+description = "Take a verified, reviewed change to production safely."
+
+prompt = """
+Invoke the ship-it skill.
+
+Arguments may name the branch or add context. Follow the skill exactly:
+- Open a clear PR with verification evidence and get CI green.
+- Roll out behind a flag in stages, watching the signals at each step.
+- Route any learnings to compound-learnings.
+"""

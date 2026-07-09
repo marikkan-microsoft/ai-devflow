@@ -1,0 +1,21 @@
+{
+  "name": "devflow",
+  "version": "0.1.0",
+  "description": "The compounding development loop for coding agents — align, spec, research, plan, build (TDD), verify, review, ship, and compound.",
+  "author": {
+    "name": "devflow contributors",
+    "url": "https://github.com/marikkan-microsoft"
+  },
+  "homepage": "https://github.com/marikkan-microsoft/ai-devflow",
+  "repository": "https://github.com/marikkan-microsoft/ai-devflow",
+  "license": "MIT",
+  "skills": "./skills/",
+  "hooks": {
+    "hooks": {}
+  },
+  "interface": {
+    "displayName": "Devflow",
+    "shortDescription": "The compounding development loop: align, spec, plan, build, verify, review, ship, compound.",
+    "category": "Productivity"
+  }
+}

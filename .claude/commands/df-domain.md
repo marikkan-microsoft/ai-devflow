@@ -1,0 +1,11 @@
+---
+description: Build/sharpen the project's shared language and record decisions.
+---
+
+Invoke the `devflow:domain-modeling` skill.
+
+`$ARGUMENTS` may name a term, area, or decision. Follow the skill exactly:
+
+- Harvest and sharpen the domain terms into `docs/devflow/CONTEXT.md`.
+- Record real, consequential decisions as ADRs under `docs/devflow/adr/`.
+- Keep the shared language consistent with how the code already speaks.

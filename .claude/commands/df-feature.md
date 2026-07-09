@@ -1,0 +1,12 @@
+---
+description: Run the full greenfield loop from idea to shipped.
+---
+
+Invoke the `devflow:feature-workflow` skill.
+
+`$ARGUMENTS` may describe the feature. Follow the skill exactly:
+
+- Orchestrate the full loop: align → spec★ → research → plan★ → build → verify →
+  review → ship★ → compound.
+- Pause for approval at each ★ milestone (spec, plan, ship).
+- Hand each durable artifact to the next phase; rewind if requirements change.

@@ -1,0 +1,10 @@
+description = "Turn a vague idea into ranked, grounded proposals."
+
+prompt = """
+Invoke the idea-refine skill.
+
+Arguments may describe the rough idea. Follow the skill exactly:
+- Diverge into 5–8 grounded options.
+- Converge to a ranked top 3 with a single clear recommendation.
+- Route the chosen pick to align-and-grill.
+"""

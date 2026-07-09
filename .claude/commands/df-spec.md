@@ -1,0 +1,13 @@
+---
+description: Write a durable, measurable spec before code.
+---
+
+Invoke the `devflow:write-spec` skill.
+
+`$ARGUMENTS` may name the work slug or add context. Follow the skill exactly:
+
+- Synthesize the aligned intent into `docs/devflow/<slug>/spec.md` from the spec
+  template.
+- Make every success criterion measurable; mark open questions
+  `[NEEDS CLARIFICATION]`.
+- Get explicit approval before moving on.

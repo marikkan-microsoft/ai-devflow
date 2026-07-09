@@ -1,0 +1,10 @@
+description = "Two-axis review (spec + standards) before merge."
+
+prompt = """
+Invoke the review-code skill.
+
+Arguments may name the branch, PR, or diff range. Follow the skill exactly:
+- Run the spec axis (spec-auditor) and the standards axis (code-reviewer) in parallel against the diff since the branch base.
+- Synthesize a single severity-labeled verdict: APPROVE or REQUEST CHANGES.
+- Resolve Critical and Important findings before merge.
+"""

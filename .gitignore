@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+*.vsix
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Machine-local, developer-specific config (never commit)
+.devflow.local.*
+*.local.json
+
+# Devflow work artifacts belong in the projects that USE devflow,
+# not in this repo. If you test devflow inside this repo, ignore them:
+/docs/devflow/

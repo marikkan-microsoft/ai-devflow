@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "devflow",
+  "description": "The compounding development loop for coding agents — a comprehensive, multi-platform agentic engineering system covering the full software lifecycle.",
+  "owner": {
+    "name": "devflow contributors",
+    "url": "https://github.com/marikkan-microsoft"
+  },
+  "plugins": [
+    {
+      "name": "devflow",
+      "source": {
+        "source": "github",
+        "repo": "marikkan-microsoft/ai-devflow"
+      },
+      "description": "Skills, agents, and commands that guide AI coding agents through align, spec, research, plan, build (TDD), verify, review, ship, and compound — for greenfield features and brownfield bug fixes.",
+      "homepage": "https://github.com/marikkan-microsoft/ai-devflow",
+      "license": "MIT",
+      "keywords": [
+        "skills",
+        "agents",
+        "engineering",
+        "workflow",
+        "spec",
+        "tdd",
+        "code-review",
+        "debugging",
+        "ship",
+        "compound-engineering"
+      ]
+    }
+  ]
+}

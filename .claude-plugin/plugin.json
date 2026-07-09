@@ -1,0 +1,19 @@
+{
+  "name": "devflow",
+  "description": "The compounding development loop for coding agents — composable skills, specialist agents, and slash commands that guide AI coding agents through the full software lifecycle: align, spec, research, plan, build (TDD), verify, review, ship, and compound. Works for greenfield features and brownfield bug fixes.",
+  "author": {
+    "name": "devflow contributors"
+  },
+  "homepage": "https://github.com/marikkan-microsoft/ai-devflow",
+  "repository": "https://github.com/marikkan-microsoft/ai-devflow",
+  "license": "MIT",
+  "commands": ["./.claude/commands"],
+  "skills": "./skills",
+  "agents": [
+    "./agents/code-reviewer.md",
+    "./agents/spec-auditor.md",
+    "./agents/security-auditor.md",
+    "./agents/test-engineer.md",
+    "./agents/performance-auditor.md"
+  ]
+}
