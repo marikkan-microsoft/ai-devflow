@@ -58,6 +58,7 @@ Map the user's intent to a skill and invoke it **before** acting:
 | Performance concern | `performance-optimization` |
 | Commit / open a PR / ship | `git-workflow` → `ship-it` |
 | Address PR review comments | `resolve-pr-feedback` |
+| Work PR review items one-by-one, isolated + approved | `pr-review-loop` |
 | Capture a learning after solving something | `compound-learnings` |
 
 ## Orchestration: three layers
