@@ -19,7 +19,7 @@ Copilot, Claude Code, Cursor, Codex**, and more.
 Each phase writes a **durable, rewindable artifact**. The return arrow is the
 point: solved problems become notes that make the next run smarter.
 
-> Devflow synthesizes five excellent open-source systems into one opinionated
+> Devflow synthesizes six excellent open-source systems into one opinionated
 > loop. See **[docs/comparison.md](docs/comparison.md)** for who does what and
 > what Devflow borrows from each.
 
@@ -61,6 +61,9 @@ prompt files, and manual folder-copy install for each tool).
   spec compliance, then code quality. *(inspired by superpowers)*
 - **Evidence, not vibes.** Every skill ends in a verification gate; nothing is
   "done" without proof. *(inspired by agent-skills)*
+- **Checked before you build.** `analyze-artifacts` audits spec↔plan for coverage
+  and consistency, and a per-project `constitution.md` holds binding principles —
+  caught in the plan, not the pull request. *(inspired by Spec Kit)*
 - **Alignment first.** `align-and-grill` interviews you one question at a time,
   and `domain-modeling` builds a shared `CONTEXT.md`. *(inspired by mattpocock)*
 - **Portable & minimal.** One `SKILL.md`-first source; small, composable skills;
@@ -70,7 +73,7 @@ prompt files, and manual folder-copy install for each tool).
 
 ## What's inside
 
-- **29 skills** across `align → spec → research → plan → build → verify → review →
+- **31 skills** across `align → spec → research → plan → build → verify → review →
   ship → compound`, plus three orchestrators (`feature-workflow`, `fix-workflow`,
   `autopilot`). Full list: **[skills catalog](skills/README.md)**.
 - **5 review personas** — `code-reviewer`, `spec-auditor`, `security-auditor`,
@@ -120,7 +123,7 @@ SKILL.md
 
 ## Credits
 
-Devflow stands on the shoulders of five outstanding, MIT-licensed projects. If an
+Devflow stands on the shoulders of six outstanding, MIT-licensed projects. If an
 idea here resonates, read the original in full:
 
 - [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) — lifecycle discipline, anti-rationalization, verification gates.
@@ -128,6 +131,7 @@ idea here resonates, read the original in full:
 - [EveryInc/compound-engineering-plugin](https://github.com/EveryInc/compound-engineering-plugin) — the compounding-knowledge loop and autopilot.
 - [lossyrob/phased-agent-workflow](https://github.com/lossyrob/phased-agent-workflow) — durable, rewindable artifacts and PR-integrated review.
 - [obra/superpowers](https://github.com/obra/superpowers) — subagent-driven development and two-stage review.
+- [github/spec-kit](https://github.com/github/spec-kit) — spec-driven development; the pre-build cross-artifact `analyze-artifacts` gate and the project `constitution`.
 
 ## License
 
