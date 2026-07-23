@@ -47,6 +47,8 @@ Map the user's intent to a skill and invoke it **before** acting:
 | Nail down requirements | `align-and-grill` → `write-spec` |
 | Understand existing code before changing it | `research-codebase` |
 | Break a spec into tasks | `plan-in-phases` |
+| Audit spec/plan before building (coverage, consistency, principles) | `analyze-artifacts` |
+| Establish project principles / non-negotiables | `domain-modeling` → `constitution.md` |
 | Implement a plan | `subagent-driven-implementation` (or `incremental-implementation`) |
 | Write/modify behavior | `test-driven-development` |
 | Design an API or module boundary | `api-and-interface-design` |

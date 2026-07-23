@@ -10,9 +10,9 @@ disable-model-invocation: true
 
 The greenfield on-ramp. This orchestrator runs the full Devflow loop for a new
 feature or non-trivial change — aligning, specifying, researching, planning,
-building, verifying, reviewing, shipping, and compounding — pausing for human
-approval at the milestones that matter. It sequences the phase skills; it does not
-reimplement them.
+auditing the plan, building, verifying, reviewing, shipping, and compounding —
+pausing for human approval at the milestones that matter. It sequences the phase
+skills; it does not reimplement them.
 
 ## When to Use
 
@@ -24,8 +24,8 @@ reimplement them.
 obvious change → invoke the single relevant skill directly.
 
 **Related:** Orchestrates `align-and-grill` → `write-spec` → `research-codebase` →
-`plan-in-phases` → `subagent-driven-implementation` → `verify-before-done` →
-`review-code` → `ship-it` → `compound-learnings`.
+`plan-in-phases` → `analyze-artifacts` → `subagent-driven-implementation` →
+`verify-before-done` → `review-code` → `ship-it` → `compound-learnings`.
 
 ## Process
 
@@ -38,13 +38,16 @@ approval at the **★ milestones**.
 3. **Research** — `research-codebase` (and `source-grounded-research` for
    unfamiliar frameworks) → `research.md`.
 4. **★ Plan** — `plan-in-phases` → `plan.md`. **Get approval** (the gate to build).
-5. **Build** — `subagent-driven-implementation` (or `incremental-implementation`),
+5. **Analyze** — `analyze-artifacts`: audit `spec` ↔ `research` ↔ `plan` for
+   coverage, consistency, clarity, and constitution compliance. Resolve every
+   **Critical** (route back to `write-spec` / `plan-in-phases`) before building.
+6. **Build** — `subagent-driven-implementation` (or `incremental-implementation`),
    each task test-first via `test-driven-development`. Design skills
    (`api-and-interface-design`, `frontend-ui-engineering`) as the work needs.
-6. **Verify** — `verify-before-done` across the whole change.
-7. **Review** — `review-code` (two-axis); resolve Critical/Important findings.
-8. **★ Ship** — `ship-it`: PR, green CI, staged rollout. **Get approval to merge.**
-9. **Compound** — `compound-learnings` for anything non-obvious; update `CONTEXT.md`.
+7. **Verify** — `verify-before-done` across the whole change.
+8. **Review** — `review-code` (two-axis); resolve Critical/Important findings.
+9. **★ Ship** — `ship-it`: PR, green CI, staged rollout. **Get approval to merge.**
+10. **Compound** — `compound-learnings` for anything non-obvious; update `CONTEXT.md`.
 
 ### Orchestration rules
 
@@ -66,6 +69,7 @@ approval at the **★ milestones**.
 ## Red Flags
 
 - Building with no approved `spec.md` or `plan.md`.
+- Building while `analyze-artifacts` has an unresolved **Critical** finding.
 - Phases skipped silently rather than deliberately right-sized.
 - No artifacts on disk under `docs/devflow/<slug>/`.
 - The loop ended without compounding a real learning.

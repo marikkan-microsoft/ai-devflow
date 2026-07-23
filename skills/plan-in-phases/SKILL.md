@@ -23,7 +23,8 @@ without judgment calls. The plan is a rewindable checkpoint.
 fix (use `fix-workflow`). Don't plan a plan.
 
 **Related:** Consumes `spec.md` + `research.md`; produces `plan.md`
-([template](../../templates/plan.md)) for the build skills and `verify-before-done`.
+([template](../../templates/plan.md)), which `analyze-artifacts` audits before the
+build skills and `verify-before-done`.
 
 ## Process
 
@@ -63,7 +64,8 @@ reversal).
 
 Present the plan. On explicit approval, set status `approved` — the gate to build.
 If you generated it autonomously, commit it as its own preparatory commit so it
-doesn't bleed into task commits.
+doesn't bleed into task commits. Then hand off to `analyze-artifacts` to audit
+coverage and consistency against the spec before the build begins.
 
 ## Common Rationalizations
 
