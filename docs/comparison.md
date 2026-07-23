@@ -1,11 +1,11 @@
 # How the source systems compare
 
-Devflow is a synthesis of five agentic-engineering systems. This document curates
+Devflow is a synthesis of six agentic-engineering systems. This document curates
 what each does, compares their shapes honestly, and states what Devflow borrows
 from each. If you're deciding whether to use Devflow or one of the originals, this
 is the map.
 
-## The five systems
+## The six systems
 
 ### [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills)
 Production-grade lifecycle skills organized `DEFINE → PLAN → BUILD → VERIFY →
@@ -58,20 +58,31 @@ strict **TDD**. Includes a `writing-skills` meta-skill and a 4-phase
 - **Strengths:** autonomous long runs, fresh-context quality control, TDD rigor.
 - **Trade-off:** the full methodology is a strong opinion to adopt wholesale.
 
+### [github/spec-kit](https://github.com/github/spec-kit)
+GitHub's **Spec-Driven Development** toolkit: the specification becomes the
+executable source of truth. A project **constitution** (`memory/constitution.md`)
+sets binding principles that gate every phase; a **`/clarify`** loop resolves
+ambiguity back into the spec; and **`/analyze`** runs a read-only cross-artifact
+consistency & coverage check (spec ↔ plan ↔ tasks, constitution compliance)
+*before* implementation. Ships a `specify` CLI with 30+ agent integrations.
+
+- **Strengths:** the constitution as an enforced gate, pre-implementation artifact analysis, technology-independent spec-first flow.
+- **Trade-off:** heavier up-front ceremony; the spec → plan → tasks pipeline assumes you adopt SDD.
+
 ## Side-by-side
 
-| Dimension | agent-skills | mattpocock | compound-eng | PAW | superpowers |
-| --- | --- | --- | --- | --- | --- |
-| Core shape | Lifecycle suite | Composable toolkit | Compounding loop | Phased + PR | Auto methodology |
-| Alignment | `interview-me` | **grilling** | `brainstorm` | spec phase | `brainstorming` |
-| Durable artifacts | partial | `CONTEXT.md`/ADR | `solutions/` | **spec/research/plan** | plans |
-| Knowledge compounding | — | — | **`/ce-compound`** | — | — |
-| Execution | incremental | `implement` | `work` | phased | **subagent 2-stage** |
-| Verification | **evidence gates** | tdd | review | review | tdd + verify |
-| Anti-rationalization | **tables** | — | — | — | **red-flag tables** |
-| Review | 5-axis persona | 2-axis parallel | reviewer skills | AI PR review | 2-stage |
-| Autonomy | `/build auto` | — | **`/lfg`** | policies | subagent runs |
-| Distribution | universal + native | universal | native (widest) | Copilot + VS Code | marketplace + native |
+| Dimension | agent-skills | mattpocock | compound-eng | PAW | superpowers | spec-kit |
+| --- | --- | --- | --- | --- | --- | --- |
+| Core shape | Lifecycle suite | Composable toolkit | Compounding loop | Phased + PR | Auto methodology | Spec-driven |
+| Alignment | `interview-me` | **grilling** | `brainstorm` | spec phase | `brainstorming` | `/clarify` |
+| Durable artifacts | partial | `CONTEXT.md`/ADR | `solutions/` | **spec/research/plan** | plans | **spec/plan/tasks** + constitution |
+| Knowledge compounding | — | — | **`/ce-compound`** | — | — | — |
+| Execution | incremental | `implement` | `work` | phased | **subagent 2-stage** | `/implement` |
+| Verification | **evidence gates** | tdd | review | review | tdd + verify | **`/analyze`** x-artifact |
+| Anti-rationalization | **tables** | — | — | — | **red-flag tables** | — |
+| Review | 5-axis persona | 2-axis parallel | reviewer skills | AI PR review | 2-stage | `/analyze` |
+| Autonomy | `/build auto` | — | **`/lfg`** | policies | subagent runs | `/implement` |
+| Distribution | universal + native | universal | native (widest) | Copilot + VS Code | marketplace + native | `specify` CLI, 30+ agents |
 
 ## What Devflow curates from each
 
@@ -85,6 +96,7 @@ strongest, compatible idea from each and fuses them into one loop.
 | **compound-engineering** | **`compound-learnings`** — the return arrow where `solutions/` notes feed the next run — and an **`autopilot`** mode. |
 | **PAW** | **Durable, rewindable artifacts** (`spec.md`/`research.md`/`plan.md`) and the PR-integrated review path (`resolve-pr-feedback`). |
 | **superpowers** | **`subagent-driven-implementation`** with the two-stage (spec, then quality) review, strict **TDD**, and the `writing-devflow-skills` meta-skill. |
+| **spec-kit** | **`analyze-artifacts`** — a read-only, pre-build cross-artifact coverage & consistency gate — and a per-project **`constitution.md`** of binding principles, enforced in `review-code`. |
 
 ## When to use Devflow vs an original
 
@@ -98,4 +110,4 @@ strongest, compatible idea from each and fuses them into one loop.
 - Need a **PR-first, phase-gated team process** on Copilot? → PAW.
 
 Devflow stands on their shoulders. If you like an idea here, the original that
-inspired it is worth reading in full — all five are excellent and MIT-licensed.
+inspired it is worth reading in full — all six are excellent and MIT-licensed.

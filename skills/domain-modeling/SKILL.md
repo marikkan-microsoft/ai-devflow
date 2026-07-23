@@ -9,23 +9,28 @@ description: Builds and sharpens the project's shared language (domain model) an
 
 When agent and humans speak different languages, the agent uses twenty words
 where one would do, names things inconsistently, and drifts from the domain. This
-skill builds a **ubiquitous language** in `CONTEXT.md` and captures hard decisions
-as ADRs — so code is named consistently, the codebase is navigable, and every
-later skill reasons in the project's own vocabulary.
+skill builds a **ubiquitous language** in `CONTEXT.md`, captures hard decisions
+as ADRs, and ratifies the project's binding **constitution** of principles — so
+code is named consistently, the codebase is navigable, and every later skill
+reasons in the project's own vocabulary and within its non-negotiables.
 
 ## When to Use
 
 - New domain terms appear during `align-and-grill`, `write-spec`, or `research-codebase`.
 - Naming in the code or conversation feels vague or inconsistent.
 - A real architectural decision (more than one defensible option) needs recording.
+- A **binding, project-wide principle** needs to be established or amended (e.g.
+  "test-backed change is non-negotiable", "money as integer cents").
 - Onboarding an agent to an unfamiliar codebase's concepts.
 
 **When NOT to use:** No new vocabulary or decisions are involved. Don't invent a
 glossary for a trivial change.
 
 **Related:** Writes `docs/devflow/CONTEXT.md`
-([template](../../templates/CONTEXT.md)) and `docs/devflow/adr/*.md`
-([template](../../templates/adr.md)). Read by every skill.
+([template](../../templates/CONTEXT.md)), `docs/devflow/constitution.md`
+([template](../../templates/constitution.md)), and `docs/devflow/adr/*.md`
+([template](../../templates/adr.md)). Read by every skill; the constitution is
+enforced by `analyze-artifacts` (pre-build) and `review-code` (post-build).
 
 ## Process
 
@@ -53,7 +58,15 @@ When a real architectural choice is made, write an ADR (context, decision,
 options considered, consequences). Number them sequentially; supersede rather
 than rewrite.
 
-### 5. Keep it live
+### 5. Ratify the constitution (when a rule binds the whole project)
+
+When a rule should bind **every** change — not just one decision — record it in
+`docs/devflow/constitution.md` ([template](../../templates/constitution.md)) as a
+numbered, **declarative and testable** principle, marking the non-negotiables
+(MUST). Keep principles few and real. Amendments get an ADR and a version bump —
+supersede a principle, don't silently rewrite it.
+
+### 6. Keep it live
 
 Update `CONTEXT.md` inline as understanding sharpens — this is a living document,
 not a one-time deliverable.
@@ -79,4 +92,6 @@ not a one-time deliverable.
 - `CONTEXT.md` exists with precise, non-circular definitions for the terms in play.
 - Deep modules are described by their small interface + hidden depth.
 - Every significant decision has an ADR with options and consequences.
+- Project-wide binding rules live in `constitution.md` as numbered, testable
+  principles, with the non-negotiables marked.
 - Naming in new code matches `CONTEXT.md`.

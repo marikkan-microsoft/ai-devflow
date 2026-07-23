@@ -24,7 +24,8 @@ labeled findings.
 an unverified change isn't ready for review.
 
 **Related:** Fan-out to `spec-auditor` + `code-reviewer` (and `security-auditor` /
-`performance-auditor` when warranted). Rubric in
+`performance-auditor` when warranted). Its pre-build twin is `analyze-artifacts`
+(audits the plan, not the diff). Rubric in
 [references/code-review-rubric.md](../../references/code-review-rubric.md).
 
 ## Process
@@ -41,7 +42,8 @@ Dispatch both, independently, so their judgments don't blur:
 - **Spec axis (`spec-auditor`):** Does the change do what the spec/task asked —
   nothing missing, nothing extra, criteria met? Ignore style here.
 - **Standards axis (`code-reviewer`):** Correctness, readability, architecture,
-  security, performance — against the repo's conventions and a smell baseline.
+  security, performance — against the repo's conventions, the project
+  `constitution.md` (a MUST-principle violation is Critical), and a smell baseline.
   Ignore "is it what was asked" here.
 
 Neither persona invokes the other; orchestration stays here.

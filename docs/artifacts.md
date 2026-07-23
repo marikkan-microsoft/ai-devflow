@@ -20,6 +20,7 @@ docs/devflow/
   solutions/                  # compounding knowledge base (compound-learnings)
     <yyyy-mm-dd>-<slug>.md
   CONTEXT.md                  # the project's shared language / domain model
+  constitution.md             # binding, project-wide principles  (domain-modeling)
   adr/                        # Architecture Decision Records
     NNNN-<slug>.md
 ```
@@ -39,9 +40,10 @@ them in.
 | --- | --- | --- | --- |
 | `spec.md` | `write-spec` | `plan-in-phases`, `review-code` (Spec axis) | [spec.md](../templates/spec.md) |
 | `research.md` | `research-codebase` | `plan-in-phases`, `subagent-driven-implementation` | [research.md](../templates/research.md) |
-| `plan.md` | `plan-in-phases` | `subagent-driven-implementation`, `verify-before-done` | [plan.md](../templates/plan.md) |
+| `plan.md` | `plan-in-phases` | `analyze-artifacts`, `subagent-driven-implementation`, `verify-before-done` | [plan.md](../templates/plan.md) |
 | `solutions/*.md` | `compound-learnings` | future `align-and-grill`, `plan-in-phases`, `research-codebase` | [solution.md](../templates/solution.md) |
 | `CONTEXT.md` | `domain-modeling` | every skill (naming, test vocabulary) | [CONTEXT.md](../templates/CONTEXT.md) |
+| `constitution.md` | `domain-modeling` | `analyze-artifacts`, `review-code`, `plan-in-phases` | [constitution.md](../templates/constitution.md) |
 | `adr/*.md` | `domain-modeling`, `api-and-interface-design` | `review-code`, future planning | [adr.md](../templates/adr.md) |
 
 ## The compounding contract
