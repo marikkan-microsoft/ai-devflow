@@ -1,6 +1,6 @@
 # Devflow skills catalog
 
-29 skills organized by phase of the loop. Each is a workflow with steps, an
+30 skills organized by phase of the loop. Each is a workflow with steps, an
 anti-rationalization table, red flags, and evidence-based exit criteria (see
 [skill anatomy](../docs/skill-anatomy.md)). Most are **model-invoked** (they
 activate automatically when the task fits); the three orchestrators are
@@ -70,6 +70,7 @@ activate automatically when the task fits); the three orchestrators are
 | [git-workflow](git-workflow/SKILL.md) | — | Trunk-based, atomic commits, deliberate staging. |
 | [ship-it](ship-it/SKILL.md) | `/df-ship` | PR, green CI, staged rollout, monitoring. |
 | [resolve-pr-feedback](resolve-pr-feedback/SKILL.md) | `/df-pr` | Work through PR review comments systematically. |
+| [pr-review-loop](pr-review-loop/SKILL.md) | — | Isolated, reviewed, one-item-at-a-time pipeline with per-item approval. |
 
 ## Compound
 
