@@ -1,6 +1,6 @@
 # Devflow skills catalog
 
-30 skills organized by phase of the loop. Each is a workflow with steps, an
+31 skills organized by phase of the loop. Each is a workflow with steps, an
 anti-rationalization table, red flags, and evidence-based exit criteria (see
 [skill anatomy](../docs/skill-anatomy.md)). Most are **model-invoked** (they
 activate automatically when the task fits); the three orchestrators are
@@ -20,7 +20,7 @@ activate automatically when the task fits); the three orchestrators are
 | [align-and-grill](align-and-grill/SKILL.md) | `/df-align` | One-question-at-a-time interview to ~95% intent clarity. |
 | [idea-refine](idea-refine/SKILL.md) | `/df-idea` | Diverge then converge a vague idea into ranked proposals. |
 | [write-spec](write-spec/SKILL.md) | `/df-spec` | Durable, measurable spec before code. |
-| [domain-modeling](domain-modeling/SKILL.md) | `/df-domain` | Build the shared language (`CONTEXT.md`) and record ADRs. |
+| [domain-modeling](domain-modeling/SKILL.md) | `/df-domain` | Build the shared language (`CONTEXT.md`), constitution, and ADRs. |
 
 ## Research
 
@@ -34,6 +34,7 @@ activate automatically when the task fits); the three orchestrators are
 | Skill | Command | Purpose |
 | --- | --- | --- |
 | [plan-in-phases](plan-in-phases/SKILL.md) | `/df-plan` | Decompose a spec into small, ordered, verifiable tasks. |
+| [analyze-artifacts](analyze-artifacts/SKILL.md) | — | Pre-build cross-artifact audit: coverage, consistency, constitution compliance. |
 
 ## Build
 

@@ -31,6 +31,7 @@ task, ignore this router and do that task.
 Before deciding anything, load what past runs already learned:
 
 - If `docs/devflow/CONTEXT.md` exists, read it — use its vocabulary.
+- If `docs/devflow/constitution.md` exists, read it — respect its binding principles.
 - Skim `docs/devflow/solutions/` for entries relevant to this task.
 - If an in-progress unit of work exists under `docs/devflow/<slug>/`, resume it.
 
