@@ -3,7 +3,7 @@
 **The compounding development loop for coding agents.**
 
 Devflow gives your AI coding agent a complete engineering workflow: composable
-**skills**, specialist review **agents**, and slash **commands** that carry a
+**skills**, specialist **agents**, and slash **commands** that carry a
 change from intent to shipped — and fold what you learn back into the next change.
 It works for **greenfield features** and **brownfield bug fixes**, on **GitHub
 Copilot, Claude Code, Cursor, Codex**, and more.
@@ -76,8 +76,9 @@ prompt files, and manual folder-copy install for each tool).
 - **31 skills** across `align → spec → research → plan → build → verify → review →
   ship → compound`, plus three orchestrators (`feature-workflow`, `fix-workflow`,
   `autopilot`). Full list: **[skills catalog](skills/README.md)**.
-- **5 review personas** — `code-reviewer`, `spec-auditor`, `security-auditor`,
-  `test-engineer`, `performance-auditor` (`agents/`).
+- **6 personas** — one implementer, `software-engineer`, plus five reviewers:
+  `code-reviewer`, `spec-auditor`, `security-auditor`, `test-engineer`,
+  `performance-auditor` (`agents/`).
 - **Slash commands** in three native formats — Claude (`.claude/commands/`),
   portable TOML (`commands/`), and Copilot prompt files (`.github/prompts/`).
 - **Reference checklists** and **artifact templates** (`references/`, `templates/`).

@@ -1,7 +1,7 @@
 # Devflow architecture
 
 Devflow is a **compounding development loop** for AI coding agents: a set of
-composable skills, review personas, and slash commands that carry a change from
+composable skills, build and review personas, and slash commands that carry a change from
 intent to shipped — and fold what you learn back into the next change. This
 document is the design: the principles, the loop, the layers, and why it's shaped
 this way.
@@ -69,6 +69,9 @@ Devflow separates three concerns so they compose cleanly:
 | **Skills** | `skills/<name>/SKILL.md` | The *how* — workflows with exit criteria | Model-invoked; orchestrators are user-invoked |
 | **Agents / personas** | `agents/<role>.md` | The *who* — a perspective + output format | A persona never invokes another persona |
 | **Commands** | `.claude/commands`, `commands`, `.github/prompts` | The *when* — user entry points | The orchestrator; one per skill entry point |
+
+`software-engineer` is the only persona that writes code; the other five review
+what it produces.
 
 The one endorsed multi-persona pattern is **parallel fan-out with a merge**:
 `review-code` runs `spec-auditor` and `code-reviewer` concurrently on independent

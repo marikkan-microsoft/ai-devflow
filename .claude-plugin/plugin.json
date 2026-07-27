@@ -10,6 +10,7 @@
   "commands": ["./.claude/commands"],
   "skills": "./skills",
   "agents": [
+    "./agents/software-engineer.md",
     "./agents/code-reviewer.md",
     "./agents/spec-auditor.md",
     "./agents/security-auditor.md",

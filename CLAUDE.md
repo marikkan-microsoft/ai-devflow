@@ -11,7 +11,7 @@ repository's structure and conventions for contributors.
 
 ```
 skills/            → Skills (SKILL.md per directory) — the workflows
-agents/            → Review personas (code-reviewer, spec-auditor, security-auditor, test-engineer, performance-auditor)
+agents/            → Personas — build (software-engineer) + review (code-reviewer, spec-auditor, security-auditor, test-engineer, performance-auditor)
 commands/          → Portable slash commands (*.toml) for Codex / Antigravity / Gemini
 .claude/commands/  → Claude Code slash commands (*.md)
 .github/prompts/   → GitHub Copilot prompt files (*.prompt.md)
