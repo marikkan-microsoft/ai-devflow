@@ -4,7 +4,7 @@ Guidance for AI coding agents (GitHub Copilot, Claude Code, Cursor, Codex, and
 others) operating in a repository where **Devflow** is installed.
 
 Devflow is a set of composable **skills** (workflows), specialist **agents**
-(review personas), and **slash commands** (entry points) that carry a change
+(build + review personas), and **slash commands** (entry points) that carry a change
 through the full engineering lifecycle and compound what you learn back into the
 next change.
 
@@ -70,7 +70,9 @@ Devflow has three composable layers with different jobs — do not confuse them:
 - **Skills** (`skills/<name>/SKILL.md`) — workflows with steps and exit criteria.
   The *how*. Mandatory when an intent matches.
 - **Agents / personas** (`agents/<role>.md`) — a role with a perspective and an
-  output format. The *who*.
+  output format. The *who*. One builds (`software-engineer`); five review
+  (`spec-auditor`, `code-reviewer`, `security-auditor`, `test-engineer`,
+  `performance-auditor`).
 - **Slash commands** (`/df-*`) — user-facing entry points. The *when*. The
   orchestration layer.
 

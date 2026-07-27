@@ -23,9 +23,9 @@ context per task keeps quality high; the two-stage gate keeps drift out.
 `test-driven-development` directly), or when subagents aren't available in the
 harness — fall back to `incremental-implementation`.
 
-**Related:** Consumes `plan.md` + `research.md`. Each task runs
-`test-driven-development`. Review stages use the `spec-auditor` and `code-reviewer`
-personas. Ends at `verify-before-done`.
+**Related:** Consumes `plan.md` + `research.md`. Each task runs as the
+`software-engineer` persona following `test-driven-development`. Review stages use
+the `spec-auditor` and `code-reviewer` personas. Ends at `verify-before-done`.
 
 ## Process
 
@@ -38,10 +38,11 @@ baseline was clean.
 
 ### 2. For each task, dispatch a fresh subagent
 
-Give the subagent only what it needs: the single task (files, acceptance
-criteria, satisfied `R#`), the relevant slice of `research.md`, and `CONTEXT.md`.
-Instruct it to follow `test-driven-development` — RED, GREEN, refactor — and stop
-at the task boundary. A subagent does **not** spawn further subagents.
+Dispatch the `software-engineer` persona and give it only what it needs: the
+single task (files, acceptance criteria, satisfied `R#`), the relevant slice of
+`research.md`, and `CONTEXT.md`. It follows `test-driven-development` — RED,
+GREEN, refactor — stops at the task boundary, and returns a Task Report. A
+subagent does **not** spawn further subagents.
 
 ### 3. Stage one — spec compliance (`spec-auditor`)
 

@@ -9,7 +9,7 @@ Follow the `subagent-driven-implementation` skill in this repository
 With no `${input:context}`, implement the **next pending task** from
 `docs/devflow/<slug>/plan.md`:
 
-- Dispatch it to a fresh subagent, built test-first via `test-driven-development`
+- Dispatch it to a fresh `software-engineer` subagent, built test-first via `test-driven-development`
   (RED → GREEN → refactor).
 - Run the two-stage review (spec compliance, then code quality); make one commit
   per task, then stop.

@@ -89,7 +89,8 @@ activate automatically when the task fits); the three orchestrators are
 
 ---
 
-**Personas** (`../agents/`): [code-reviewer](../agents/code-reviewer.md),
+**Personas** (`../agents/`): [software-engineer](../agents/software-engineer.md)
+(build), [code-reviewer](../agents/code-reviewer.md),
 [spec-auditor](../agents/spec-auditor.md),
 [security-auditor](../agents/security-auditor.md),
 [test-engineer](../agents/test-engineer.md),

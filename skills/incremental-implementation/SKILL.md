@@ -22,7 +22,8 @@ reversible. It's the direct-execution counterpart to
 
 **When NOT to use:** A one-line, zero-risk change. Don't ceremony-wrap a typo fix.
 
-**Related:** Drives `test-driven-development` per slice. Optionally isolates work
+**Related:** Drives `test-driven-development` per slice, applying the
+`software-engineer` persona's build standards. Optionally isolates work
 with a git worktree/branch (see below). Feeds `verify-before-done` and `review-code`.
 
 ## Process
