@@ -355,5 +355,23 @@ class AuditTests(unittest.TestCase):
             )
 
 
+class WorkflowHookTests(unittest.TestCase):
+    def test_relevant_stages_expose_the_conditional_capability_hook(self):
+        skill_paths = (
+            "feature-workflow/SKILL.md",
+            "fix-workflow/SKILL.md",
+            "autopilot/SKILL.md",
+            "source-grounded-research/SKILL.md",
+            "security-hardening/SKILL.md",
+            "review-code/SKILL.md",
+        )
+
+        for relative_path in skill_paths:
+            with self.subTest(skill=relative_path):
+                content = (ROOT / "skills" / relative_path).read_text(encoding="utf-8")
+                self.assertIn("Capability hook", content)
+                self.assertIn("awesome-copilot-discovery", content)
+
+
 if __name__ == "__main__":
     unittest.main()

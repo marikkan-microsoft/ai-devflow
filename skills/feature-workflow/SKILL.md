@@ -26,11 +26,21 @@ obvious change → invoke the single relevant skill directly.
 **Related:** Orchestrates `align-and-grill` → `write-spec` → `research-codebase` →
 `plan-in-phases` → `analyze-artifacts` → `subagent-driven-implementation` →
 `verify-before-done` → `review-code` → `ship-it` → `compound-learnings`.
+Uses `awesome-copilot-discovery` only for a named specialist gap.
 
 ## Process
 
 Run these phases in order. Each hands its durable artifact to the next; pause for
 approval at the **★ milestones**.
+
+### Capability hook (conditional)
+
+At each phase boundary, ask whether the next phase lacks a specific capability
+that materially affects its outcome. If yes, invoke `awesome-copilot-discovery`
+for that phase and use at most one accepted, pinned resource. If local Devflow is
+sufficient, skip the network lookup. An external resource may supplement the
+phase but never reorder the loop, change its artifacts, or bypass an approval,
+test, verification, or review gate.
 
 1. **Align** — `align-and-grill` until ~95% intent clarity. (Skip only if intent
    is already crisp.)
@@ -70,6 +80,7 @@ approval at the **★ milestones**.
 
 - Building with no approved `spec.md` or `plan.md`.
 - Building while `analyze-artifacts` has an unresolved **Critical** finding.
+- Loading an unpinned external resource or letting it replace a Devflow phase.
 - Phases skipped silently rather than deliberately right-sized.
 - No artifacts on disk under `docs/devflow/<slug>/`.
 - The loop ended without compounding a real learning.
@@ -77,6 +88,8 @@ approval at the **★ milestones**.
 ## Verification
 
 - Each phase's own Verification section passed before the next began.
+- Every named specialist gap has a recorded `USED`, `REJECTED`, or `SKIPPED`
+  capability-hook decision.
 - `spec.md`, `research.md`, `plan.md` exist and were approved at the ★ gates.
 - The change is verified, reviewed, and shipped per those skills.
 - A `solutions/` note (and any ADRs) captured the learnings.

@@ -24,11 +24,20 @@ A large, ambiguous problem that needs requirements → start with `align-and-gri
 
 **Related:** Orchestrates `debug-root-cause` (→ `research-codebase` as needed) →
 `test-driven-development` → `verify-before-done` → `review-code` → `ship-it` →
-`compound-learnings`.
+`compound-learnings`. Uses `awesome-copilot-discovery` only for a named
+specialist gap.
 
 ## Process
 
 Fast-path — right-sized, but the gates still hold.
+
+### Capability hook (conditional)
+
+After the root cause identifies the technical domain, invoke
+`awesome-copilot-discovery` only if the local fix path lacks specific expertise
+(for example, a specialized migration or agent-supply-chain audit). Use at most
+one accepted, pinned resource. It may sharpen diagnosis or review, but it cannot
+replace the reproduction, failing test, root-cause proof, or existing review.
 
 1. **Reproduce & root-cause** — `debug-root-cause`: get a deterministic repro,
    localize, and confirm the underlying cause (pull in `research-codebase` to map
@@ -66,6 +75,7 @@ Fast-path — right-sized, but the gates still hold.
 ## Red Flags
 
 - Code changed before a reliable reproduction existed.
+- External guidance was used without a pinned source and capability-fit decision.
 - No failing test captured the bug.
 - Only the new test ran, not the full suite.
 - The fix shipped with no `solutions/` note.
@@ -73,6 +83,8 @@ Fast-path — right-sized, but the gates still hold.
 ## Verification
 
 - Deterministic repro and confirmed root cause preceded the fix.
+- Any specialist gap has a recorded `USED`, `REJECTED`, or `SKIPPED`
+  capability-hook decision.
 - A test that failed before the fix now passes; full suite green.
 - The change was reviewed and shipped per those skills.
 - A `solutions/` note captured cause, signs, and guardrail.
