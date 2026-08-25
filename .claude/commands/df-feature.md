@@ -2,7 +2,9 @@
 description: Run the full greenfield loop from idea to shipped.
 ---
 
-Invoke the `devflow:feature-workflow` skill.
+Follow the `feature-workflow` instructions directly from
+`skills/feature-workflow/SKILL.md`. This command is the user-invocation boundary;
+do not try to invoke the model-hidden orchestrator as another skill.
 
 `$ARGUMENTS` may describe the feature. Follow the skill exactly:
 

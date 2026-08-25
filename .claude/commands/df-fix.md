@@ -2,7 +2,9 @@
 description: Run the brownfield bug-fix fast-path.
 ---
 
-Invoke the `devflow:fix-workflow` skill.
+Follow the `fix-workflow` instructions directly from
+`skills/fix-workflow/SKILL.md`. This command is the user-invocation boundary; do
+not try to invoke the model-hidden orchestrator as another skill.
 
 `$ARGUMENTS` may describe the bug. Follow the skill exactly:
 
