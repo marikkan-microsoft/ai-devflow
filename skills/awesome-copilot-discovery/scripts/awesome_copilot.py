@@ -21,6 +21,7 @@ from urllib.parse import quote
 REPOSITORY = "github/awesome-copilot"
 MAX_RESOURCE_FILES = 100
 MAX_RESOURCE_BYTES = 5 * 1024 * 1024
+DEFAULT_GH_TIMEOUT_SECONDS = 60
 SHA_PATTERN = re.compile(r"^[0-9a-f]{40}$")
 SAFE_SEGMENT_PATTERN = re.compile(r"^[A-Za-z0-9._-]+$")
 
@@ -74,6 +75,19 @@ EXECUTABLE_SUFFIXES = {
     ".rb",
     ".sh",
 }
+
+CATALOG_POISON_PATTERNS = (
+    re.compile(
+        r"(?i)\b(ignore|disregard)\s+(all\s+)?"
+        r"(previous|prior|system)\s+instructions?\b"
+    ),
+    re.compile(r"(?i)\b(do not|don't)\s+(mention|tell)\b.*\buser\b"),
+    re.compile(r"(?i)\bkeep\s+(this|it)\s+hidden\b"),
+    re.compile(r"(?i)\byou\s+are\s+now\b"),
+    re.compile(r"(?i)\boverrides?\s+(your\s+)?system\s+prompt\b"),
+    re.compile(r"(?i)\bbefore\s+using\s+this\s+tool\b"),
+    re.compile(r"(?i)~/(?:\.ssh|\.aws|\.azure)\b"),
+)
 
 
 class BridgeError(RuntimeError):
@@ -173,6 +187,19 @@ def _candidate_score(entry: CatalogEntry, phase: str, query: str) -> int:
     return score
 
 
+def _matched_terms(entry: CatalogEntry, phase: str, query: str) -> list[str]:
+    haystack = f"{entry.name} {entry.description}".lower()
+    terms = (*PHASE_TERMS.get(phase, ()), *_search_terms(query))
+    return list(dict.fromkeys(term for term in terms if term in haystack))
+
+
+def _catalog_entry_is_safe(entry: CatalogEntry) -> bool:
+    metadata = f"{entry.name}\n{entry.description}"
+    if any(character in INVISIBLE_CODEPOINTS for character in metadata):
+        return False
+    return not any(pattern.search(metadata) for pattern in CATALOG_POISON_PATTERNS)
+
+
 def rank_candidates(
     entries: list[CatalogEntry], phase: str, query: str, limit: int
 ) -> list[CatalogEntry]:
@@ -185,6 +212,7 @@ def rank_candidates(
     scored = [
         (_candidate_score(entry, phase, query), entry)
         for entry in entries
+        if _catalog_entry_is_safe(entry)
     ]
     matches = [item for item in scored if item[0] > 0]
     matches.sort(key=lambda item: (-item[0], item[1].name.lower(), item[1].path))
@@ -212,8 +240,8 @@ def make_discovery_result(
                 "name": entry.name,
                 "kind": entry.kind,
                 "path": entry.path,
-                "description": entry.description,
                 "score": _candidate_score(entry, phase, query),
+                "matchedTerms": _matched_terms(entry, phase, query),
                 "source": f"{REPOSITORY}:{entry.path}@{sha}",
             }
             for entry in entries
@@ -343,20 +371,33 @@ def select_resource_files(
 
 
 class GhClient:
-    def __init__(self, executable: str = "gh") -> None:
+    def __init__(
+        self,
+        executable: str = "gh",
+        timeout_seconds: int = DEFAULT_GH_TIMEOUT_SECONDS,
+    ) -> None:
+        if timeout_seconds < 1:
+            raise ValueError("timeout_seconds must be positive")
         self.executable = executable
+        self.timeout_seconds = timeout_seconds
 
     def _run(self, arguments: list[str]) -> bytes:
         if shutil.which(self.executable) is None:
             raise BridgeError(
                 "GitHub CLI is required; install gh and authenticate before discovery"
             )
-        completed = subprocess.run(
-            [self.executable, *arguments],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            check=False,
-        )
+        try:
+            completed = subprocess.run(
+                [self.executable, *arguments],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+                timeout=self.timeout_seconds,
+            )
+        except subprocess.TimeoutExpired as error:
+            raise BridgeError(
+                f"gh timed out after {self.timeout_seconds} seconds"
+            ) from error
         if completed.returncode != 0:
             detail = completed.stderr.decode("utf-8", errors="replace").strip()
             raise BridgeError(detail or f"gh exited with {completed.returncode}")
@@ -426,6 +467,8 @@ def verify_catalog_identity(
         raise BridgeError(
             "candidate identity does not match exactly one pinned catalog entry"
         )
+    if not _catalog_entry_is_safe(matches[0]):
+        raise BridgeError("candidate catalog metadata failed the injection screen")
     return matches[0]
 
 
@@ -448,7 +491,6 @@ def fetch_resource(
     entry_path: str,
     sha: str,
     output_dir: Path,
-    description: str,
 ) -> Path:
     sha = validate_sha(sha)
     tree = client.api_json(
@@ -492,7 +534,6 @@ def fetch_resource(
             "kind": kind,
             "name": name,
             "entryPath": entry_path,
-            "description": description,
             "source": f"{REPOSITORY}:{entry_path}@{sha}",
             "fetchedAt": datetime.now(timezone.utc).isoformat(),
             "files": [
@@ -611,10 +652,69 @@ def _read_receipt(root: Path) -> dict[str, Any]:
         raise ValueError("SOURCE.json must contain an object")
     if receipt.get("repository") != REPOSITORY:
         raise ValueError("SOURCE.json repository is not github/awesome-copilot")
-    validate_sha(str(receipt.get("sha", "")))
-    validate_entry_path(str(receipt.get("kind", "")), str(receipt.get("entryPath", "")))
-    if not isinstance(receipt.get("files"), list):
+    sha = validate_sha(str(receipt.get("sha", "")))
+    kind = str(receipt.get("kind", ""))
+    entry_path = validate_entry_path(kind, str(receipt.get("entryPath", "")))
+    expected_source = f"{REPOSITORY}:{entry_path}@{sha}"
+    if receipt.get("source") != expected_source:
+        raise ValueError("SOURCE.json source identity does not match its fields")
+    if not isinstance(receipt.get("name"), str) or not receipt["name"].strip():
+        raise ValueError("SOURCE.json name must be a non-empty string")
+
+    files = receipt.get("files")
+    if not isinstance(files, list):
         raise ValueError("SOURCE.json files must be an array")
+    if not files or len(files) > MAX_RESOURCE_FILES:
+        raise ValueError(
+            f"SOURCE.json must list between 1 and {MAX_RESOURCE_FILES} files"
+        )
+
+    entry = PurePosixPath(entry_path)
+    expected_entry_relative = "SKILL.md" if kind == "skill" else entry.name
+    seen: set[str] = set()
+    total_size = 0
+    for file_entry in files:
+        if not isinstance(file_entry, dict):
+            raise ValueError("SOURCE.json contains an invalid file entry")
+        relative = file_entry.get("path")
+        upstream = file_entry.get("upstreamPath")
+        mode = file_entry.get("mode")
+        file_sha = file_entry.get("sha")
+        size = file_entry.get("size")
+        if not isinstance(relative, str):
+            raise ValueError("SOURCE.json file path must be a string")
+        relative_path = _validate_tree_path(relative)
+        if relative in seen:
+            raise ValueError(f"SOURCE.json repeats file path: {relative}")
+        seen.add(relative)
+        if not isinstance(upstream, str):
+            raise ValueError("SOURCE.json upstreamPath must be a string")
+        _validate_tree_path(upstream)
+        expected_upstream = (
+            (entry.parent / relative_path).as_posix()
+            if kind == "skill"
+            else entry_path
+        )
+        if upstream != expected_upstream:
+            raise ValueError(
+                f"SOURCE.json upstream path mismatch for {relative}"
+            )
+        if mode not in {"100644", "100755"}:
+            raise ValueError(f"SOURCE.json file mode is invalid for {relative}")
+        if not isinstance(file_sha, str) or not SHA_PATTERN.fullmatch(file_sha):
+            raise ValueError(f"SOURCE.json file sha is invalid for {relative}")
+        if not isinstance(size, int) or size < 0:
+            raise ValueError(f"SOURCE.json file size is invalid for {relative}")
+        total_size += size
+
+    if expected_entry_relative not in seen:
+        raise ValueError("SOURCE.json does not include the resource entry point")
+    if kind == "agent" and len(files) != 1:
+        raise ValueError("an agent resource may contain only its catalog file")
+    if total_size > MAX_RESOURCE_BYTES:
+        raise ValueError(
+            f"SOURCE.json resource exceeds {MAX_RESOURCE_BYTES} bytes"
+        )
     return receipt
 
 
@@ -659,18 +759,16 @@ def audit_resource(root: Path) -> dict[str, Any]:
             continue
 
         content = file_path.read_bytes()
-        recorded_sha = file_entry.get("sha")
-        if isinstance(recorded_sha, str) and SHA_PATTERN.fullmatch(recorded_sha):
-            if _git_blob_sha(content) != recorded_sha:
-                findings.append(
-                    _finding(
-                        "content_digest_mismatch",
-                        "block",
-                        relative,
-                        1,
-                        "staged content does not match its recorded Git blob",
-                    )
+        if _git_blob_sha(content) != file_entry["sha"]:
+            findings.append(
+                _finding(
+                    "content_digest_mismatch",
+                    "block",
+                    relative,
+                    1,
+                    "staged content does not match its recorded Git blob",
                 )
+            )
 
         mode = file_entry.get("mode")
         if mode == "100755" or file_path.suffix.lower() in EXECUTABLE_SUFFIXES:
@@ -757,10 +855,7 @@ def audit_resource(root: Path) -> dict[str, Any]:
     return {
         "status": status,
         "manualReviewRequired": True,
-        "source": receipt.get(
-            "source",
-            f"{REPOSITORY}:{receipt['entryPath']}@{receipt['sha']}",
-        ),
+        "source": f"{REPOSITORY}:{receipt['entryPath']}@{receipt['sha']}",
         "findings": findings,
     }
 
@@ -820,7 +915,7 @@ def _run_discover(args: argparse.Namespace, client: GhClient) -> int:
 def _run_fetch(args: argparse.Namespace, client: GhClient) -> int:
     sha = validate_sha(args.sha)
     entry_path = validate_entry_path(args.kind, args.entry_path)
-    catalog_entry = verify_catalog_identity(
+    verify_catalog_identity(
         client, args.kind, args.name, entry_path, sha
     )
     target = fetch_resource(
@@ -830,7 +925,6 @@ def _run_fetch(args: argparse.Namespace, client: GhClient) -> int:
         entry_path,
         sha,
         args.output_dir,
-        catalog_entry.description,
     )
     _print_json(
         {
