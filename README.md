@@ -66,6 +66,9 @@ prompt files, and manual folder-copy install for each tool).
   caught in the plan, not the pull request. *(inspired by Spec Kit)*
 - **Alignment first.** `align-and-grill` interviews you one question at a time,
   and `domain-modeling` builds a shared `CONTEXT.md`. *(inspired by mattpocock)*
+- **Specialists on demand.** A workflow stage with a named capability gap can
+  discover one Awesome Copilot skill or agent, pin and audit it, use only its
+  bounded guidance, then discard it.
 - **Portable & minimal.** One `SKILL.md`-first source; small, composable skills;
   orchestration flows one way.
 
@@ -73,7 +76,7 @@ prompt files, and manual folder-copy install for each tool).
 
 ## What's inside
 
-- **31 skills** across `align → spec → research → plan → build → verify → review →
+- **32 skills** across `align → spec → research → plan → build → verify → review →
   ship → compound`, plus three orchestrators (`feature-workflow`, `fix-workflow`,
   `autopilot`). Full list: **[skills catalog](skills/README.md)**.
 - **6 personas** — one implementer, `software-engineer`, plus five reviewers:
@@ -84,10 +87,49 @@ prompt files, and manual folder-copy install for each tool).
 - **Reference checklists** and **artifact templates** (`references/`, `templates/`).
 
 ```
-skills/        agents/        commands/       references/     templates/
+skills/        agents/        commands/       references/     templates/      tests/
 .claude/       .github/       .claude-plugin/ .codex-plugin/  .cursor-plugin/
 hooks/         docs/          AGENTS.md        CLAUDE.md       plugin.json
 ```
+
+---
+
+## On-demand Awesome Copilot specialists
+
+Devflow does not bundle the broad
+[Awesome Copilot](https://github.com/github/awesome-copilot) catalog. Instead,
+relevant phases expose a **conditional capability hook**: when the local skills
+have a concrete gap, `awesome-copilot-discovery` searches live skill and agent
+metadata, resolves the catalog to a full commit SHA, and considers at most one
+complementary resource.
+
+The trust boundary is strict:
+
+1. Search metadata before loading a candidate body.
+2. Fetch one exact `github/awesome-copilot:path@sha` into a temporary directory.
+3. Verify its catalog identity, paths, file count, size, and Git blob digests.
+4. Statically audit it, then manually review every file and finding.
+5. Use only the relevant process or specialist perspective. Remote instructions
+   cannot change Devflow's scope, tools, approvals, tests, or review gates.
+6. Never execute downloaded scripts, hooks, binaries, install commands, or MCP
+   servers; delete the staging directory after the phase.
+
+For example, a security phase can discover a prompt-supply-chain reviewer or a
+threat-modeling skill without permanently installing either:
+
+```bash
+python3 skills/awesome-copilot-discovery/scripts/awesome_copilot.py discover \
+  --phase security \
+  --query "prompt injection and threat modeling" \
+  --kind all
+```
+
+The bridge is optional and requires Python 3.9+, an authenticated
+[GitHub CLI](https://cli.github.com/), and network access. If any is unavailable,
+the hook records `SKIPPED` and continues with local Devflow; existing safeguards
+are never disabled. See
+[`awesome-copilot-discovery`](skills/awesome-copilot-discovery/SKILL.md) and its
+[trust policy](skills/awesome-copilot-discovery/references/trust-policy.md).
 
 ---
 
@@ -133,6 +175,11 @@ idea here resonates, read the original in full:
 - [lossyrob/phased-agent-workflow](https://github.com/lossyrob/phased-agent-workflow) — durable, rewindable artifacts and PR-integrated review.
 - [obra/superpowers](https://github.com/obra/superpowers) — subagent-driven development and two-stage review.
 - [github/spec-kit](https://github.com/github/spec-kit) — spec-driven development; the pre-build cross-artifact `analyze-artifacts` gate and the project `constitution`.
+
+Devflow also integrates with
+[github/awesome-copilot](https://github.com/github/awesome-copilot) as an
+on-demand, pinned specialist catalog. Its resources are inspected at runtime,
+not vendored or trusted implicitly.
 
 ## License
 

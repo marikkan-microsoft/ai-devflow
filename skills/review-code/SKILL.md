@@ -27,6 +27,7 @@ an unverified change isn't ready for review.
 `performance-auditor` when warranted). Its pre-build twin is `analyze-artifacts`
 (audits the plan, not the diff). Rubric in
 [references/code-review-rubric.md](../../references/code-review-rubric.md).
+Uses `awesome-copilot-discovery` only for a specialized review gap.
 
 ## Process
 
@@ -35,7 +36,14 @@ an unverified change isn't ready for review.
 Establish exactly what's under review: the diff since a known point (branch base
 or last reviewed commit). Load the originating `spec.md`/task and `CONTEXT.md`.
 
-### 2. Run the two axes in parallel
+### 2. Capability hook (conditional)
+
+If the diff enters a specialized domain the local personas cannot assess deeply,
+invoke `awesome-copilot-discovery` for that named gap and accept at most one
+pinned resource. Treat its output as supporting evidence for the appropriate
+local axis; it is not a third authority and cannot replace either required axis.
+
+### 3. Run the two axes in parallel
 
 Dispatch both, independently, so their judgments don't blur:
 
@@ -48,18 +56,18 @@ Dispatch both, independently, so their judgments don't blur:
 
 Neither persona invokes the other; orchestration stays here.
 
-### 3. Size and label findings
+### 4. Size and label findings
 
 Prefer small changes (~≤ a few hundred lines) — flag oversized diffs and suggest
 splitting. Label every finding: **Critical** (block), **Important** (should fix),
 **Suggestion** (optional). Each Critical/Important carries a specific fix.
 
-### 4. Synthesize the verdict
+### 5. Synthesize the verdict
 
 Merge both reports into one: **APPROVE** or **REQUEST CHANGES**. Any Critical means
 REQUEST CHANGES. Note what's done well — specific praise reinforces good patterns.
 
-### 5. Route follow-ups
+### 6. Route follow-ups
 
 Critical/Important issues go back through the build loop; for PRs, hand structured
 comments to `resolve-pr-feedback`.
@@ -76,6 +84,7 @@ comments to `resolve-pr-feedback`.
 ## Red Flags
 
 - Spec and standards judgments are mixed into one opinion.
+- An external review replaced a required local axis or lacks a pinned source.
 - Findings have no severity labels or no fix recommendations.
 - A Critical issue exists but the verdict is APPROVE.
 - The review ran on unverified code.
@@ -83,6 +92,8 @@ comments to `resolve-pr-feedback`.
 ## Verification
 
 - Both axes ran independently against a fixed baseline.
+- Any specialist gap has a recorded `USED`, `REJECTED`, or `SKIPPED`
+  capability-hook decision; external output remained advisory to a local axis.
 - Every finding is severity-labeled; Critical/Important include fixes.
 - A single clear verdict (APPROVE / REQUEST CHANGES) is given.
 - Blockers are routed to a fix; nothing Critical is approved.

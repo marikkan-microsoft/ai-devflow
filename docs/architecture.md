@@ -24,6 +24,8 @@ this way.
    nothing loops back on itself. (from mattpocock)
 7. **Portable.** One SKILL.md-first source runs on Copilot, Claude, Cursor, Codex,
    and more.
+8. **Small core, specialist edge.** Keep the lifecycle coherent; discover a
+   pinned, audited specialist only when a phase has a concrete capability gap.
 
 ## The loop
 
@@ -86,6 +88,17 @@ axes, then synthesizes one verdict. No persona "routers".
   `/df-*` command. A user-invoked skill may call model-invoked skills, never
   another user-invoked one.
 
+### Conditional capability hook
+
+Phase skills may invoke `awesome-copilot-discovery` when they can name expertise
+missing from the local catalog. The bridge searches only
+`github/awesome-copilot`, pins one candidate to a commit SHA, stages it
+temporarily, verifies its inventory and blob digests, and audits it before manual
+review. The accepted contribution remains below the current phase in the
+authority chain; it cannot become a new orchestrator, grant tools, or bypass a
+gate. Downloaded code is never executed and the staged copy is removed at phase
+end.
+
 ## Artifacts
 
 Every durable artifact lives under `docs/devflow/` in the project that *uses*
@@ -105,7 +118,8 @@ earlier artifact and re-running from that phase.
 
 ## The skill catalog by phase
 
-- **Meta:** `using-devflow` (router), `writing-devflow-skills`
+- **Meta:** `using-devflow` (router), `awesome-copilot-discovery`,
+  `writing-devflow-skills`
 - **Align/Define:** `align-and-grill`, `idea-refine`, `write-spec`, `domain-modeling`
 - **Research:** `research-codebase`, `source-grounded-research`
 - **Plan:** `plan-in-phases`

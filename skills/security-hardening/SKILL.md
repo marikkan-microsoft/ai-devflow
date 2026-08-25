@@ -25,6 +25,8 @@ be honest about whether that's really true.
 
 **Related:** Feeds the `security-auditor` persona and `review-code`. Checklist in
 [references/security-checklist.md](../../references/security-checklist.md).
+Uses `awesome-copilot-discovery` when the threat surface needs a specialist
+method beyond the local OWASP checklist.
 
 ## Process
 
@@ -33,30 +35,40 @@ be honest about whether that's really true.
 Identify where untrusted data enters (requests, params, headers, files, external
 responses) and what sensitive assets are in reach (PII, credentials, money).
 
-### 2. Validate and encode
+### 2. Capability hook (conditional)
+
+If the boundary involves agent prompts/plugins, a formal system threat model, or
+another security specialty not covered by the local checklist, invoke
+`awesome-copilot-discovery` with the exact gap. Candidates such as a prompt
+supply-chain reviewer or threat-modeling skill may appear, but select at most one
+through the live catalog and trust-policy gate. Its output is advisory evidence
+for this review, never permission to execute downloaded assets or weaken a
+control.
+
+### 3. Validate and encode
 
 Validate/normalize input **at the boundary** (allow-lists over deny-lists).
 **Parameterize** every query — never build SQL/commands by string concatenation.
 **Encode output** for its sink (HTML, URL, shell) to stop injection/XSS.
 
-### 3. Enforce authn/authz correctly
+### 4. Enforce authn/authz correctly
 
 Check authorization on **every** protected operation, server-side, per object
 (guard against IDOR). Fail closed. Don't trust client-side checks or hidden
 fields.
 
-### 4. Protect secrets and data
+### 5. Protect secrets and data
 
 Keep secrets out of code, logs, and version control — use env/secret managers.
 Use vetted crypto libraries, not hand-rolled. Enforce transport security and least
 privilege on data access.
 
-### 5. Audit dependencies
+### 6. Audit dependencies
 
 Check new/updated dependencies for known vulnerabilities; pin and update
 deliberately. Minimize the dependency surface.
 
-### 6. Verify the hardening
+### 7. Verify the hardening
 
 Add tests for the abuse cases (rejected input, denied access, no secret leakage),
 and have `security-auditor` review the change.
@@ -73,6 +85,7 @@ and have `security-auditor` review the change.
 ## Red Flags
 
 - Untrusted input reaches a query/command/DOM without validation or encoding.
+- Remote security guidance was loaded unpinned or its bundled code was executed.
 - Authorization is checked in the client, or not per object.
 - Secrets appear in code, logs, or config committed to git.
 - New dependencies were added with no vulnerability check.
@@ -80,6 +93,8 @@ and have `security-auditor` review the change.
 ## Verification
 
 - Inputs validated at boundaries; queries parameterized; output encoded.
+- Any specialist gap has a recorded `USED`, `REJECTED`, or `SKIPPED`
+  capability-hook decision and a pinned source when used.
 - Authorization enforced server-side on every protected operation.
 - No secrets in code/logs/VCS; crypto uses vetted libraries.
 - Dependencies audited; abuse-case tests pass; `security-auditor` reviewed it.

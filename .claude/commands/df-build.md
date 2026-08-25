@@ -2,7 +2,8 @@
 description: Implement the plan test-first; add `auto` for one-approval autonomous run.
 ---
 
-Invoke the `devflow:subagent-driven-implementation` skill.
+Follow the `subagent-driven-implementation` instructions directly from
+`skills/subagent-driven-implementation/SKILL.md`.
 
 With no arguments, implement the **next pending task** from
 `docs/devflow/<slug>/plan.md`:
@@ -12,6 +13,8 @@ With no arguments, implement the **next pending task** from
 - Run the two-stage review (spec compliance, then code quality); make one commit
   per task, then stop.
 
-If `$ARGUMENTS` is `auto` (or `all`), invoke the `devflow:autopilot` skill instead
-— one approval gate, then run every remaining task autonomously, stopping only for
-blockers or irreversible steps.
+If `$ARGUMENTS` is `auto` (or `all`), follow `skills/autopilot/SKILL.md`
+directly instead. This command is the user-invocation boundary; do not try to
+invoke the model-hidden orchestrator as another skill. Take one approval gate,
+then run every remaining task autonomously, stopping only for blockers or
+irreversible steps.

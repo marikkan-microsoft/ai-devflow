@@ -29,6 +29,10 @@ npx skills add marikkan-microsoft/ai-devflow --skill review-code   # just one
 
 Then start any task with `/df` (or ask the agent to "route this with devflow").
 
+The optional `awesome-copilot-discovery` capability hook also needs Python 3.9+,
+an authenticated GitHub CLI, and network access. Without them, Devflow records
+the specialist lookup as skipped and continues with its local skills.
+
 ---
 
 ## GitHub Copilot  ⭐ (primary target)
