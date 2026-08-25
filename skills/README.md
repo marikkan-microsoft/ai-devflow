@@ -1,6 +1,6 @@
 # Devflow skills catalog
 
-31 skills organized by phase of the loop. Each is a workflow with steps, an
+32 skills organized by phase of the loop. Each is a workflow with steps, an
 anti-rationalization table, red flags, and evidence-based exit criteria (see
 [skill anatomy](../docs/skill-anatomy.md)). Most are **model-invoked** (they
 activate automatically when the task fits); the three orchestrators are
@@ -11,6 +11,7 @@ activate automatically when the task fits); the three orchestrators are
 | Skill | Purpose |
 | --- | --- |
 | [using-devflow](using-devflow/SKILL.md) | Router — picks the on-ramp and routes work to the right skill and phase. |
+| [awesome-copilot-discovery](awesome-copilot-discovery/SKILL.md) | Conditionally discovers, pins, audits, and temporarily applies one complementary Awesome Copilot resource. |
 | [writing-devflow-skills](writing-devflow-skills/SKILL.md) | How to author and edit Devflow skills consistently. |
 
 ## Align / Define

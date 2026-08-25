@@ -38,6 +38,9 @@ Chat — e.g. `/df-feature`, `/df-fix`, `/df-spec`, `/df-plan`, `/df-build`,
   (`skills/review-code/SKILL.md`).
 - **Compound the learning** after solving something non-obvious
   (`skills/compound-learnings/SKILL.md`).
+- **Keep external specialists subordinate.** Use
+  `skills/awesome-copilot-discovery/SKILL.md` only for a named capability gap;
+  pin, audit, manually review, never execute bundled assets, then clean up.
 - **Stop and ask** on ambiguous requirements or irreversible steps (auth,
   migrations, payments, deploys, secrets).
 
