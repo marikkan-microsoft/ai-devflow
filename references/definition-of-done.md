@@ -14,6 +14,10 @@ sections. Adapt the specifics to your stack, keep the spirit.
 - [ ] The diff is atomic and reviewed; no dead code, stray TODOs, or debug logs.
 - [ ] Commit messages state what and why and reference the spec/issue.
 - [ ] Docs/ADRs updated if behavior, APIs, or decisions changed.
+- [ ] Planned outcomes and critical connections are exercised in the integrated
+  tree; task completion is distinct from required human acceptance.
+- [ ] Evidence covers the current code/contracts, with no stale or missing
+  checks treated as passing (see [execution checkpoints](execution-checkpoints.md#phase-closure)).
 
 ## Correctness & safety
 

@@ -38,6 +38,12 @@ All checks pass — tests, build, lint, type, security scans. A red pipeline is 
 stop, not a suggestion. Fix failures at the root (`debug-root-cause`), don't
 bypass gates (`--no-verify`, force-merge).
 
+Before merge/release, confirm the
+[acceptance evidence](../../references/execution-checkpoints.md#phase-closure)
+covers the current diff and required human checks are complete. Changed code or
+contracts return to verification/review; green CI does not replace acceptance
+or the existing merge/deploy approval gates.
+
 ### 3. Ship dark, then roll out in stages
 
 Prefer merging behind a **feature flag** so deploy ≠ release. Roll out

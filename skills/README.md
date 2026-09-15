@@ -6,6 +6,10 @@ anti-rationalization table, red flags, and evidence-based exit criteria (see
 activate automatically when the task fits); the three orchestrators are
 **user-invoked** (reached via a `/df-*` command).
 
+[GSD Core, the seventh pillar](../docs/gsd-core.md), strengthens these existing
+skills with outcome-first proof, bounded task packets, and safe resumption. It
+adds no skill, persona, command, or required runtime.
+
 ## Meta
 
 | Skill | Purpose |
@@ -34,7 +38,7 @@ activate automatically when the task fits); the three orchestrators are
 
 | Skill | Command | Purpose |
 | --- | --- | --- |
-| [plan-in-phases](plan-in-phases/SKILL.md) | `/df-plan` | Decompose a spec into small, ordered, verifiable tasks. |
+| [plan-in-phases](plan-in-phases/SKILL.md) | `/df-plan` | Plan backward from outcomes into small tasks, dependency contracts, and integration proof. |
 | [analyze-artifacts](analyze-artifacts/SKILL.md) | — | Pre-build cross-artifact audit: coverage, consistency, constitution compliance. |
 
 ## Build
@@ -46,7 +50,7 @@ activate automatically when the task fits); the three orchestrators are
 | [test-driven-development](test-driven-development/SKILL.md) | — | Red-green-refactor; Prove-It for bugs. |
 | [api-and-interface-design](api-and-interface-design/SKILL.md) | — | Contract-first design; Hyrum's Law; boundary validation. |
 | [frontend-ui-engineering](frontend-ui-engineering/SKILL.md) | — | Component/state architecture; accessibility by default. |
-| [context-engineering](context-engineering/SKILL.md) | — | Feed the agent the right context; wire tools/MCP. |
+| [context-engineering](context-engineering/SKILL.md) | — | Bounded task context, tool/MCP access, and artifact-based handoff/resumption. |
 
 ## Verify
 
@@ -101,4 +105,5 @@ activate automatically when the task fits); the three orchestrators are
 [definition-of-done](../references/definition-of-done.md),
 [testing-patterns](../references/testing-patterns.md),
 [security-checklist](../references/security-checklist.md),
-[code-review-rubric](../references/code-review-rubric.md).
+[code-review-rubric](../references/code-review-rubric.md),
+[execution-checkpoints](../references/execution-checkpoints.md).

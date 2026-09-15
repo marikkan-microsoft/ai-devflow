@@ -32,6 +32,22 @@ Schemas, types, API shapes, events, invariants that must be preserved.
 
 What calls this, what this calls, external services, feature flags.
 
+## Boundary map
+
+For cross-boundary work; omit when the existing path is already clear.
+
+| Producer / consumer | Current contract (file:line) | Unproven assumption | Read-only prerequisite / proof needed |
+| --- | --- | --- | --- |
+| <components> | <interface, data, error semantics> | <unknown integration behavior> | <safe check or bounded spike> |
+
+## Planning inputs
+
+Classify findings as **constraint**, **assumption**, **option**, or **deferred**.
+Link locked decisions/ADRs and name which unknown could invalidate the approach.
+An option is not an approved requirement; mark any scope decision for its owner.
+If singular/plural, required/optional, or derived/chosen assumptions changed,
+identify the affected domain invariant rather than guessing at a new model.
+
 ## Constraints, risks & unknowns
 
 - Constraint: …

@@ -26,6 +26,10 @@ this way.
    and more.
 8. **Small core, specialist edge.** Keep the lifecycle coherent; discover a
    pinned, audited specialist only when a phase has a concrete capability gap.
+9. **Outcome-first, resumable execution.** Plan backward from observable behavior
+   and critical connections; prove untested boundaries before expanding. Fresh
+   task packets and reconciled checkpoints preserve context without making
+   summaries substitutes for evidence. (from [GSD Core](gsd-core.md))
 
 ## The loop
 
@@ -108,6 +112,7 @@ Devflow (templates in [`/templates`](../templates), contract in
 ```
 docs/devflow/
   <slug>/ spec.md · research.md · plan.md   ← per unit of work
+          notes.md (optional)              ← bounded execution checkpoint
   solutions/*.md                            ← the compounding knowledge base
   CONTEXT.md                                ← shared language / domain model
   adr/*.md                                  ← architecture decisions
@@ -115,6 +120,14 @@ docs/devflow/
 
 Because artifacts are plain files in git, **rewind** is just reverting to an
 earlier artifact and re-running from that phase.
+
+GSD Core is the seventh source pillar, not a fourth architectural layer. Its
+milestone/phase/plan/task machinery is consolidated into the existing unit of
+work and plan tasks. `plan.md` holds proof, dependency contracts, coverage, and
+phase closures; optional `notes.md` points to current work and pending gates.
+`context-engineering` reconciles those records with the repository on resume.
+The [shared execution contract](../references/execution-checkpoints.md) adds no
+runtime, command, persona, or mandatory artifact tree.
 
 ## The skill catalog by phase
 

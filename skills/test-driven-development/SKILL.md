@@ -69,6 +69,10 @@ to prove no regression. The reproduction test becomes the permanent guardrail.
 - **DAMP over DRY** in tests: a readable test that repeats itself beats a clever
   abstract one.
 - Name tests as capabilities, and use `CONTEXT.md` vocabulary.
+- For a prohibition or validation gate, use a deliberately invalid fixture
+  **and a valid control**. Prove rejection is caused by the intended violation,
+  not broken setup; then prove allowed behavior still passes. Do not copy an
+  executor's "failed first" claim as evidence of a run.
 
 ### Discipline
 

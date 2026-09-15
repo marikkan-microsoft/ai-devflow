@@ -19,7 +19,7 @@ Copilot, Claude Code, Cursor, Codex**, and more.
 Each phase writes a **durable, rewindable artifact**. The return arrow is the
 point: solved problems become notes that make the next run smarter.
 
-> Devflow synthesizes six excellent open-source systems into one opinionated
+> Devflow synthesizes seven excellent open-source systems into one opinionated
 > loop. See **[docs/comparison.md](docs/comparison.md)** for who does what and
 > what Devflow borrows from each.
 
@@ -66,6 +66,10 @@ prompt files, and manual folder-copy install for each tool).
   caught in the plan, not the pull request. *(inspired by Spec Kit)*
 - **Alignment first.** `align-and-grill` interviews you one question at a time,
   and `domain-modeling` builds a shared `CONTEXT.md`. *(inspired by mattpocock)*
+- **Outcome-first, resumable execution.** Plan backward from observable outcomes,
+  prove critical connections before expanding, and give fresh workers bounded
+  context with durable evidence and safe checkpoints. *(inspired by GSD Core;
+  [what is incorporated](docs/gsd-core.md))*
 - **Specialists on demand.** A workflow stage with a named capability gap can
   discover one Awesome Copilot skill or agent, pin and audit it, use only its
   bounded guidance, then discard it.
@@ -140,7 +144,8 @@ are never disabled. See
 | [docs/install.md](docs/install.md) | Install on Copilot, Claude, Cursor, Codex, and others (native + manual). |
 | [docs/usage.md](docs/usage.md) | Worked examples for both on-ramps and single skills. |
 | [docs/architecture.md](docs/architecture.md) | The design: the loop, layers, artifacts, principles. |
-| [docs/comparison.md](docs/comparison.md) | How the five source systems compare and what Devflow curates. |
+| [docs/comparison.md](docs/comparison.md) | How the seven source systems compare and what Devflow curates. |
+| [docs/gsd-core.md](docs/gsd-core.md) | The seventh pillar: pinned sources, adopted mechanisms, and deliberate exclusions. |
 | [docs/artifacts.md](docs/artifacts.md) | The durable-artifact contracts and rewind model. |
 | [docs/skill-anatomy.md](docs/skill-anatomy.md) | How a skill is structured (for contributors). |
 | [AGENTS.md](AGENTS.md) | The agent operating manual (intent map, orchestration rules). |
@@ -166,7 +171,7 @@ SKILL.md
 
 ## Credits
 
-Devflow stands on the shoulders of six outstanding, MIT-licensed projects. If an
+Devflow stands on the shoulders of seven outstanding, MIT-licensed projects. If an
 idea here resonates, read the original in full:
 
 - [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) — lifecycle discipline, anti-rationalization, verification gates.
@@ -175,6 +180,7 @@ idea here resonates, read the original in full:
 - [lossyrob/phased-agent-workflow](https://github.com/lossyrob/phased-agent-workflow) — durable, rewindable artifacts and PR-integrated review.
 - [obra/superpowers](https://github.com/obra/superpowers) — subagent-driven development and two-stage review.
 - [github/spec-kit](https://github.com/github/spec-kit) — spec-driven development; the pre-build cross-artifact `analyze-artifacts` gate and the project `constitution`.
+- [open-gsd/gsd-core](https://github.com/open-gsd/gsd-core) — goal-backward planning, tracer feedback, bounded task context, resumable execution, and current acceptance evidence. [Integration and provenance](docs/gsd-core.md).
 
 Devflow also integrates with
 [github/awesome-copilot](https://github.com/github/awesome-copilot) as an

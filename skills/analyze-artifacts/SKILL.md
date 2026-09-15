@@ -54,6 +54,13 @@ it, and every task back to a requirement:
   security, or availability target) but has no task or verification step →
   Critical. (Post-launch business KPIs are exempt — they aren't build work.)
 
+For [execution checkpoints](../../references/execution-checkpoints.md#plan-from-the-outcome),
+trace outcomes through artifacts and critical connections to actual planned
+proof. Missing integration proof or an uncovered locked decision is Critical.
+Check meaning, not just IDs: a task mentioning a requirement may still narrow it.
+Research options/deferred ideas require approval before becoming work; an
+approved deferral must be explicit in scope, never counted as completion.
+
 ### 3. Consistency — do the artifacts agree?
 
 - **Terminology drift** — the same concept named differently across spec/plan, or
@@ -63,6 +70,12 @@ it, and every task back to a requirement:
 - **Phantom entities** — a data entity/module in the plan that the spec never
   introduced → Important.
 - **Ordering** — a task depends on work sequenced after it → Important.
+- **Unbuildable dependencies** — missing/cyclic dependencies, unmet prerequisites,
+  or a blocked producer treated as delivered → Critical.
+- **Unsafe concurrency** — overlapping file ownership or shared mutable state
+  without isolation/ordering → Critical for the affected parallel work.
+- **Premature expansion** — an unproven boundary has no tracer feedback gate →
+  Critical; a proven-pattern exemption needs a reason.
 
 ### 4. Clarity — is anything still vague?
 

@@ -33,7 +33,12 @@ Before deciding anything, load what past runs already learned:
 - If `docs/devflow/CONTEXT.md` exists, read it — use its vocabulary.
 - If `docs/devflow/constitution.md` exists, read it — respect its binding principles.
 - Skim `docs/devflow/solutions/` for entries relevant to this task.
-- If an in-progress unit of work exists under `docs/devflow/<slug>/`, resume it.
+- If an in-progress unit of work exists under `docs/devflow/<slug>/`, use
+  `context-engineering` and
+  [resume reconciliation](../../references/execution-checkpoints.md#resume-reconciliation).
+  Match the user's task to the slug; ask if several could apply. Reconcile the
+  plan, optional notes, actual worktree, and evidence before picking the next
+  action. Finished tasks may still need verification, review, or approval.
 
 ### 2. Pick the on-ramp
 

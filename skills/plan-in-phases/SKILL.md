@@ -39,6 +39,12 @@ State the approach: which module boundaries you'll build along and in what order
 Prefer an order where each step leaves the system working (tracer-bullet slices),
 not a big-bang integration at the end.
 
+Work backward from the approved outcome through artifacts, critical connections,
+and proof using [execution checkpoints](../../references/execution-checkpoints.md#plan-from-the-outcome).
+For an unproven boundary, plan a real end-to-end tracer before expansion; record
+why it is unnecessary when the path is already proven. Put the riskiest unknown
+integration early without violating dependencies.
+
 ### 3. Decompose into tasks
 
 Break work into tasks that are:
@@ -49,16 +55,29 @@ Break work into tasks that are:
 - **Specified** — each task names its `Files`, the requirement(s) it `Satisfies`
   (`R#`/`SC#`), its `Acceptance` (the test that proves it), and `Depends on`.
 
+Include bounded read-first references, delivered interfaces, exact verification,
+and read-only external prerequisites where needed. Honor locked decisions and
+delegated choices from the spec/ADRs; do not turn research options into scope.
+
 ### 4. Order by dependency
 
 Sequence tasks so every task's dependencies come first. Make the dependency graph
 explicit; the build skill executes in that order.
+
+Check for missing dependencies, cycles, and shared mutable state. Record
+producer/consumer contracts; only verified prerequisites release dependents.
+Default to serial work unless file ownership and state independence are clear.
 
 ### 5. Plan verification and rollback
 
 Add a verification plan that maps to the spec's success criteria, and note the
 highest-risk tasks with their rollback (feature flag, `git revert`, migration
 reversal).
+
+Map `R#`/`SC#` to owning tasks and evidence in the template's coverage table.
+Plan phase demos, cross-phase integration, required human acceptance, and
+reassessment after each tracer/phase. Optional execution notes preserve progress;
+existing small plans do not need additional artifacts.
 
 ### 6. Approve
 
@@ -82,6 +101,7 @@ coverage and consistency against the spec before the build begins.
 - A task has no acceptance criteria or doesn't map to a requirement.
 - The plan has no dependency order.
 - No rollback story for risky tasks.
+- A tracer can fail while expansion proceeds, or a summary counts as proof.
 
 ## Verification
 
@@ -89,4 +109,6 @@ coverage and consistency against the spec before the build begins.
 - Every task has files, acceptance criteria, and a satisfied `R#`/`SC#`.
 - Tasks are dependency-ordered and independently committable.
 - A verification plan maps to the spec's success criteria.
+- Critical connections, dependency contracts, and phase closure evidence are
+  explicit wherever the work crosses an unproven boundary.
 - The user approved the plan before implementation.

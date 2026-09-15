@@ -1,6 +1,6 @@
 ---
 name: context-engineering
-description: Feeds the agent the right information at the right time — rules files, context packing, and tool/MCP integration. Use when starting a session, switching tasks, or when output quality drops because the agent lacks or is drowning in context.
+description: Feeds the agent bounded task context and safely restores work from artifacts. Use when starting or resuming a session, handing off, switching tasks, wiring tools/MCP, or when missing or excessive context degrades output.
 ---
 
 # Context Engineering
@@ -40,6 +40,18 @@ Pull in `CONTEXT.md`, the relevant `spec.md`/`research.md`/`plan.md`, and matchi
 `solutions/` entries. Prefer precise slices (a function, a section) over whole
 files. Progressive disclosure: load supporting detail only when reached.
 
+On resume, first apply
+[resume reconciliation](../../references/execution-checkpoints.md#resume-reconciliation)
+to the actual worktree, branch, diff, plan, and optional `notes.md`. Missing notes
+do not require migration; stale notes are not authority. Recover the next
+unfinished gate, not just the next unchecked task, and preserve approval and
+retry boundaries.
+
+For delegated work, assemble the shared
+[task packet](../../references/execution-checkpoints.md#task-packets): scoped
+outcome, relevant decisions and interfaces, delivered dependencies, proof, and
+stop conditions. Load only prior summaries this task consumes.
+
 ### 3. Wire the right tools
 
 Ensure the tools and MCP servers that provide live truth are available (test
@@ -51,6 +63,12 @@ beats a fact it must *remember*.
 Drop stale, irrelevant, or duplicated context. If the working set has grown
 sprawling and the agent is drifting, compact: summarize decisions so far into a
 handoff note and reset to the essentials.
+
+Use the existing optional `docs/devflow/<slug>/notes.md` with the
+[notes template](../../templates/notes.md) before a handoff or blocked stop.
+Record current stage/task, repository state, evidence links, consumed attempts,
+pending decisions, and the exact next action. Keep durable learning in
+`solutions/`/ADRs, not a growing session transcript.
 
 ### 5. Re-ground on drift
 
@@ -72,6 +90,7 @@ pushing on with a degraded context.
 - It's inventing APIs or file paths (missing or wrong context).
 - The context window is full of stale, unrelated material.
 - Quality is dropping and no one re-grounded.
+- A restart reset retries, inferred approval, or trusted stale completion claims.
 
 ## Verification
 
@@ -79,3 +98,5 @@ pushing on with a degraded context.
 - Needed tools/MCP servers are available and working.
 - The agent's outputs are consistent with the loaded artifacts.
 - On drift, context was re-grounded from files rather than guessed.
+- A handoff can resume the correct task or missing gate from reconciled artifacts
+  without discarding work, replaying side effects, or inventing evidence.
