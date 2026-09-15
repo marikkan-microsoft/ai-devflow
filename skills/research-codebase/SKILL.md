@@ -46,6 +46,12 @@ Trace the **current control flow** the change will touch, citing exact
 Document the data shapes, types, API surfaces, events, and invariants the change
 must preserve. These are the constraints the plan must respect.
 
+For cross-boundary work, fill the template's boundary map: producer/consumer,
+current interface, unproven assumption, and read-only prerequisite. Prioritize a
+bounded spike where an unknown could invalidate the approach. If cardinality,
+optionality, or who chooses a value changed, route the domain assumption through
+`domain-modeling` rather than preserving an obsolete model by accident.
+
 ### 4. Find integration points and prior art
 
 Note what calls this code and what it calls, external dependencies, and feature
@@ -55,6 +61,11 @@ flags. Search `docs/devflow/solutions/` and `adr/` for prior art worth reusing.
 
 List constraints, risks, and anything that needs a spike to answer. Don't guess —
 mark it as unknown so planning accounts for it.
+
+Classify planning inputs as constraints, assumptions, options, or deferred ideas.
+Link locked decisions and conflicts explicitly. Research informs the approved
+spec; it does not grant new scope (see
+[execution checkpoints](../../references/execution-checkpoints.md#plan-from-the-outcome)).
 
 ### 6. Verify claims against the code
 
@@ -83,3 +94,5 @@ No inferred behavior stated as fact.
 - Every behavioral claim cites a real `file:line`.
 - Contracts/invariants to preserve are explicit.
 - Unknowns and risks are listed, not hidden.
+- Unproven boundaries and prerequisites are explicit; options are not presented
+  as approved obligations.

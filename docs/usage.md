@@ -63,6 +63,44 @@ task still test-driven, reviewed, and committed individually — stopping only f
 blockers or irreversible steps (auth, migrations, payments, deploys, secrets). You
 come back to a green, open PR.
 
+That same checkpoint records a finite retry budget (default three total attempts
+per unresolved blocker) and any agreed observable time/cost limit. Expected TDD
+RED tests do not consume retries. Exhaustion produces a durable blocker/next
+action, not an endless loop or a reset budget after a handoff. New scope and
+human-only decisions still pause for approval.
+
+## Worked example - multi-phase work and resumption
+
+For the rate-limiting feature above, `/df-plan` works backward from the agreed
+behavior: callers below their configured limit succeed; callers above it receive
+the specified response. The plan maps those `R#`/`SC#` outcomes to implementation
+paths, critical connections, and exact checks.
+
+1. **Prove the boundary.** If the route/middleware/counter-store connection is
+   unproven, the first task is a real end-to-end tracer. Its integration check
+   must exercise the actual request path before work expands. A proven local
+   pattern can skip this extra tracer with a reason.
+2. **Deliver dependent behavior.** Later tasks consume the verified counter
+   interface and cover the approved isolation/expiry cases. They name
+   prerequisites and contracts, not just an order. Shared mutable state prevents
+   unsafe parallelism even when files differ.
+3. **Close with evidence.** After each phase, update `plan.md` coverage and a
+   concise closure: actual checks, checked revision/dirty files, decisions,
+   remaining risks, and what changes downstream. Tests do not imply any required
+   human acceptance or merge approval.
+4. **Resume the missing action.** If interrupted, `context-engineering` writes
+   optional `docs/devflow/rate-limiting/notes.md`. Continue with
+   `/df resume rate-limiting`; the router reconciles artifacts and Git before
+   picking an action. If tasks are complete but final verification never ran,
+   it resumes verification rather than rebuilding or declaring success.
+
+No new commands or GSD installation are needed. `/df-build` still handles one
+task by default; `/df-auto` still uses its single routine approval checkpoint.
+Missing notes are reconstructed from existing artifacts; stale notes trigger
+reconciliation, not a reset of uncommitted work, approvals, or retries.
+See the [source/adaptation ledger](gsd-core.md) and
+[checkpoint contract](../references/execution-checkpoints.md) for the details.
+
 ## Reaching for a single skill
 
 You don't need an orchestrator for small, well-understood work. Any command works
@@ -77,6 +115,7 @@ standalone:
 | Understand existing code | `/df-research` | `research-codebase` |
 | Plan an approved spec | `/df-plan` | `plan-in-phases` |
 | Implement the next task | `/df-build` | `subagent-driven-implementation` |
+| Resume interrupted work | `/df resume <slug>` | `using-devflow` + `context-engineering` |
 | Debug a failure | `/df-debug` | `debug-root-cause` |
 | Review a diff | `/df-review` | `review-code` |
 | Simplify code | `/df-simplify` | `simplify-code` |
@@ -94,6 +133,9 @@ Artifacts are checkpoints. If requirements change, edit `spec.md` and re-run
 `/df-plan`. If the plan proved wrong, edit `plan.md` and re-run `/df-build`. If the
 approach was misguided, `git revert` the artifacts and restart from `/df-spec`.
 The files *are* the state — no special tooling.
+Reapprove changed scope/contracts, rerun applicable artifact analysis, and refresh
+affected evidence before resuming; earlier green results do not cover a changed
+plan.
 
 ## Compounding, over time
 

@@ -46,6 +46,11 @@ re-interrogate. Capture:
 - **Out of scope** — what it explicitly won't do.
 - **Boundaries & constraints** — tech, data, security, performance budgets.
 
+Keep requirement IDs stable and state consequential invariants/prohibitions.
+Where choices matter, record the template's **Decision scope**: locked decisions,
+explicitly delegated discretion, and deferred ideas. Link ADRs rather than
+duplicating them; later research cannot silently change these boundaries.
+
 ### 3. Mark unknowns, don't paper over them
 
 Any unresolved decision gets `[NEEDS CLARIFICATION: …]`. The spec stays `draft`

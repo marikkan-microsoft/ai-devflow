@@ -36,13 +36,23 @@ Confirm a clean git state (or a dedicated worktree/branch — see
 before the first task. A per-task commit history is only a clean rollback if the
 baseline was clean.
 
+For interrupted work, run `context-engineering` and
+[resume reconciliation](../../references/execution-checkpoints.md#resume-reconciliation)
+before dispatch. Inspect existing work, preserve ownership, and resume a missing
+verification/review gate rather than blindly re-executing completed tasks.
+
 ### 2. For each task, dispatch a fresh subagent
 
-Dispatch the `software-engineer` persona and give it only what it needs: the
-single task (files, acceptance criteria, satisfied `R#`), the relevant slice of
-`research.md`, and `CONTEXT.md`. It follows `test-driven-development` — RED,
+Choose a dependency-ready task and check its external prerequisites read-only.
+Dispatch the `software-engineer` persona with the bounded
+[task packet](../../references/execution-checkpoints.md#task-packets): the single
+task, relevant research/decisions, current interfaces, delivered dependencies,
+verification, and stop conditions. It follows `test-driven-development` — RED,
 GREEN, refactor — stops at the task boundary, and returns a Task Report. A
 subagent does **not** spawn further subagents.
+
+The orchestrator owns shared plan/checkpoint updates and enforces the contract's
+[scope and retry limits](../../references/execution-checkpoints.md#bounded-execution).
 
 ### 3. Stage one — spec compliance (`spec-auditor`)
 
@@ -64,8 +74,15 @@ is a clean rollback. Mark the task done in `plan.md`.
 
 ### 6. Advance in dependency order
 
-Move to the next task whose dependencies are satisfied. Stop and ask the user on
-an unfixable failure, spec ambiguity, or a high-risk/irreversible task.
+Before expanding a tracer or completing a phase, use `verify-before-done` for
+[phase closure](../../references/execution-checkpoints.md#phase-closure) in the
+integrated tree. Update coverage and the phase summary in `plan.md`; reassess
+downstream contracts. An unproven tracer or blocked prerequisite blocks its
+dependents. Changed scope/contracts return to approval and applicable artifact
+analysis.
+
+Move to the next ready task. Stop and checkpoint via `context-engineering` on an
+unfixable failure, exhausted budget, ambiguity, or a high-risk/irreversible task.
 
 ### 7. Finish
 
@@ -87,10 +104,13 @@ route to `review-code`.
 - A task was committed without passing both review stages.
 - Commits bundle multiple tasks or unrelated files.
 - A subagent spawned its own subagents.
+- Work expanded before the tracer or its required dependency was proven.
 
 ## Verification
 
 - Every task has its own commit touching only its files.
 - Each task passed spec-compliance **and** code-quality review before commit.
 - `plan.md` task statuses reflect reality.
+- Phase summaries and current integration evidence support dependency release;
+  interruptions preserve the next gate and consumed retry budget.
 - `verify-before-done` passed for the whole change before review.

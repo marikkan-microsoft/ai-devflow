@@ -32,6 +32,9 @@ absence is itself a finding to report, not a reason to bypass the gate.
 Pull the acceptance criteria from `plan.md`/`spec.md` (or the bug's reproduction).
 Done is *those* criteria met — not "it runs".
 
+Read the approved spec independently of the task summary. The plan may add
+detail but cannot subtract an outcome, locked decision, or required human check.
+
 ### 2. Gather evidence, don't assert
 
 For the change, collect and actually look at:
@@ -43,15 +46,32 @@ For the change, collect and actually look at:
   (output, `browser-verification` data, logs).
 - **Artifacts:** the expected file exists at its path (spec/research/plan/solution).
 
+Apply [phase closure](../../references/execution-checkpoints.md#phase-closure):
+trace observable outcomes through actual artifacts and critical connections.
+Check for stubs/missing wiring and exercise the integrated path, including
+relevant failure behavior. Isolated test success is not cross-phase proof.
+Bind results to the checked revision and dirty-file context; inspect actual
+output rather than trusting an executor's completion narrative.
+
 ### 3. Check the criteria off explicitly
 
 Walk each acceptance criterion / success criterion and mark it met or not, with
 the evidence beside it. An unmet criterion means **not done**.
 
+Update the plan's requirement coverage and phase closure where present. Keep
+implementation, verification, and required human acceptance distinct. Missing,
+skipped, unreadable, or stale evidence is not green; record `human-needed` for
+judgment that tests cannot supply. Run a missing check, but route an insufficient
+criterion back for a product/domain decision instead of guessing.
+
 ### 4. Look for collateral damage
 
 Confirm no regressions (full suite, not just the new test), no new warnings/lint
 errors, and nothing left half-done or commented out.
+
+Recheck affected evidence after code, contract, spec, or plan changes. During
+re-verification, distinguish a demonstrated regression/criterion violation from
+a new preference: prove new blockers, do not grow scope to chase opinions.
 
 ### 5. Report honestly
 
@@ -73,10 +93,13 @@ gaps are surfaced, never hidden.
 - Only the new test was run, not the full suite.
 - Acceptance criteria weren't checked one by one.
 - Known gaps are omitted from the report.
+- A checked task, summary, or old green result is being used as current proof.
 
 ## Verification
 
 - Full test suite run and green; build clean.
 - Every acceptance/success criterion checked off with evidence.
 - Observable behavior exercised and captured.
+- Planned outcomes and critical connections are proven in the integrated tree;
+  required human acceptance and stale/missing evidence remain explicit.
 - Any unverifiable items explicitly reported.

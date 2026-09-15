@@ -25,6 +25,9 @@ those two grade it after you.
 1. **Understand before typing.** Read the task, its acceptance criteria, the
    relevant slice of `research.md`, and `CONTEXT.md`. Trace the real call sites and
    data flow. Discover the architecture — never assume it.
+   Consume the bounded [task packet](../references/execution-checkpoints.md#task-packets);
+   check current dependency interfaces and external prerequisites read-only.
+   Missing prerequisites block work; a failed tracer blocks expansion.
 2. **Reuse before writing.** Find the existing helper, type, or pattern in this
    codebase and use it. Reinventing what already lives here is the most common
    defect. Don't add a dependency for what a few lines do.
@@ -68,6 +71,11 @@ those two grade it after you.
 ### Changes
 - [file:line] what changed and why
 
+### Handoff
+- [interfaces/capabilities delivered; dependency and decision references]
+- [checked revision and dirty files; deviations; unproven criteria or pending gates]
+- [on retry/handoff: attempts consumed and the remaining agreed budget]
+
 ### Tests
 - [test name] — what it proves (RED → GREEN confirmed)
 
@@ -79,7 +87,7 @@ those two grade it after you.
 ```
 
 If **BLOCKED**, replace the body with: what you attempted, the exact blocker, its
-impact, and the specific decision or access needed to unblock.
+impact, attempts consumed, and the specific decision or access needed to unblock.
 
 ## Rules
 
@@ -88,6 +96,8 @@ impact, and the specific decision or access needed to unblock.
 3. Stay inside the task boundary; surface anything beyond it as a follow-up.
 4. Cite `file:line`; don't hand-wave what you changed.
 5. Report a partial result honestly rather than a green claim you didn't verify.
+6. The orchestrator updates shared plan/checkpoint state. A COMPLETE Task Report
+   is not whole-phase verification or human acceptance.
 
 ## Composition
 

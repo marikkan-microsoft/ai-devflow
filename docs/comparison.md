@@ -1,11 +1,11 @@
 # How the source systems compare
 
-Devflow is a synthesis of six agentic-engineering systems. This document curates
+Devflow is a synthesis of seven agentic-engineering systems. This document curates
 what each does, compares their shapes honestly, and states what Devflow borrows
 from each. If you're deciding whether to use Devflow or one of the originals, this
 is the map.
 
-## The six systems
+## The seven systems
 
 ### [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills)
 Production-grade lifecycle skills organized `DEFINE → PLAN → BUILD → VERIFY →
@@ -32,8 +32,8 @@ and a clean **user-invoked vs model-invoked** split so orchestration flows one w
 "Each unit of engineering work should make the next easier." A tight loop
 (`brainstorm → plan → work → simplify → review → compound`) where **`/ce-compound`
 writes learnings that the next run reads as grounding** — knowledge literally
-compounds. Also ships an autonomous end-to-end mode (`/lfg`). Broadest native
-platform support of the five.
+compounds. Also ships an autonomous end-to-end mode (`/lfg`) and broad native
+platform support across coding agents.
 
 - **Strengths:** the compounding-knowledge flywheel, autonomous pipeline, reach.
 - **Trade-off:** opinionated by design; the loop assumes you adopt the whole thing.
@@ -69,20 +69,35 @@ consistency & coverage check (spec ↔ plan ↔ tasks, constitution compliance)
 - **Strengths:** the constitution as an enforced gate, pre-implementation artifact analysis, technology-independent spec-first flow.
 - **Trade-off:** heavier up-front ceremony; the spec → plan → tasks pipeline assumes you adopt SDD.
 
+### [open-gsd/gsd-core](https://github.com/open-gsd/gsd-core)
+Context-engineered, spec-driven delivery through a milestone/phase/plan/task
+hierarchy. Its useful connective tissue is **goal-backward planning** (observable
+outcomes, artifacts, critical wiring), **tracer-first feedback**, bounded executor
+packets, durable summaries, and artifact-first resumption. Verification separates
+implementation claims from current outcome evidence and required human judgment.
+
+- **Strengths:** explicit integration proof, context-efficient handoffs, recovery
+  of unfinished gates, decision traceability, and bounded autonomous execution.
+- **Trade-off:** the upstream includes its own CLI, runtime adapters, and
+  `.planning/` machinery. Devflow adopts compatible procedures, not that runtime.
+
+See the [pinned source/adaptation ledger](gsd-core.md) for what is incorporated,
+what is already covered, exclusions, and evidence limits.
+
 ## Side-by-side
 
-| Dimension | agent-skills | mattpocock | compound-eng | PAW | superpowers | spec-kit |
-| --- | --- | --- | --- | --- | --- | --- |
-| Core shape | Lifecycle suite | Composable toolkit | Compounding loop | Phased + PR | Auto methodology | Spec-driven |
-| Alignment | `interview-me` | **grilling** | `brainstorm` | spec phase | `brainstorming` | `/clarify` |
-| Durable artifacts | partial | `CONTEXT.md`/ADR | `solutions/` | **spec/research/plan** | plans | **spec/plan/tasks** + constitution |
-| Knowledge compounding | — | — | **`/ce-compound`** | — | — | — |
-| Execution | incremental | `implement` | `work` | phased | **subagent 2-stage** | `/implement` |
-| Verification | **evidence gates** | tdd | review | review | tdd + verify | **`/analyze`** x-artifact |
-| Anti-rationalization | **tables** | — | — | — | **red-flag tables** | — |
-| Review | 5-axis persona | 2-axis parallel | reviewer skills | AI PR review | 2-stage | `/analyze` |
-| Autonomy | `/build auto` | — | **`/lfg`** | policies | subagent runs | `/implement` |
-| Distribution | universal + native | universal | native (widest) | Copilot + VS Code | marketplace + native | `specify` CLI, 30+ agents |
+| Dimension | agent-skills | mattpocock | compound-eng | PAW | superpowers | spec-kit | GSD Core |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Core shape | Lifecycle suite | Composable toolkit | Compounding loop | Phased + PR | Auto methodology | Spec-driven | Context-engineered phase loop |
+| Alignment | `interview-me` | **grilling** | `brainstorm` | spec phase | `brainstorming` | `/clarify` | Discuss + decision scope |
+| Durable artifacts | partial | `CONTEXT.md`/ADR | `solutions/` | **spec/research/plan** | plans | **spec/plan/tasks** + constitution | Roadmap, state, plans, summaries |
+| Knowledge compounding | — | — | **`/ce-compound`** | — | — | — | Decisions + dependency summaries |
+| Execution | incremental | `implement` | `work` | phased | **subagent 2-stage** | `/implement` | **Tracer-first + bounded packets** |
+| Verification | **evidence gates** | tdd | review | review | tdd + verify | **`/analyze`** x-artifact | **Outcomes + wiring + freshness** |
+| Anti-rationalization | **tables** | — | — | — | **red-flag tables** | — | Scoped execution/verification rules |
+| Review | 5-axis persona | 2-axis parallel | reviewer skills | AI PR review | 2-stage | `/analyze` | Plan checker + verifier + milestone audit |
+| Autonomy | `/build auto` | — | **`/lfg`** | policies | subagent runs | `/implement` | Bounded retries + checkpoint recovery |
+| Distribution | universal + native | universal | native (widest) | Copilot + VS Code | marketplace + native | `specify` CLI, 30+ agents | CLI + runtime adapters |
 
 ## What Devflow curates from each
 
@@ -97,6 +112,7 @@ strongest, compatible idea from each and fuses them into one loop.
 | **PAW** | **Durable, rewindable artifacts** (`spec.md`/`research.md`/`plan.md`) and the PR-integrated review path (`resolve-pr-feedback`). |
 | **superpowers** | **`subagent-driven-implementation`** with the two-stage (spec, then quality) review, strict **TDD**, and the `writing-devflow-skills` meta-skill. |
 | **spec-kit** | **`analyze-artifacts`** — a read-only, pre-build cross-artifact coverage & consistency gate — and a per-project **`constitution.md`** of binding principles, enforced in `review-code`. |
+| **GSD Core** | **Goal-backward proof**, tracer feedback before expansion, dependency/interface contracts, bounded task packets, reconciled checkpoints, and current acceptance evidence — through existing skills and artifacts, not a new runtime. |
 
 ## When to use Devflow vs an original
 
@@ -108,6 +124,10 @@ strongest, compatible idea from each and fuses them into one loop.
 - Already all-in on **one vendor's ecosystem/loop**? → compound-engineering or
   superpowers.
 - Need a **PR-first, phase-gated team process** on Copilot? → PAW.
+- Want GSD's **full milestone runtime and tooling**, rather than selected
+  procedures integrated into Devflow's portable loop? → GSD Core.
 
 Devflow stands on their shoulders. If you like an idea here, the original that
-inspired it is worth reading in full — all six are excellent and MIT-licensed.
+inspired it is worth reading in full — all seven are excellent and MIT-licensed.
+The optional Awesome Copilot specialist catalog is an integration, not an eighth
+foundational system.

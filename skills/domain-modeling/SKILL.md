@@ -46,6 +46,12 @@ Put each term against edge-case scenarios. If two terms overlap, force the
 distinction or merge them. Prefer the words users/business actually use over
 invented jargon.
 
+When a change turns one into many, required into optional, or derived into
+user-chosen, revisit the underlying identity/invariant. Decide whether to
+generalize the model, keep a deliberate compatibility boundary, or retain it
+unchanged; record the reason and an invariant test where applicable. Do not add
+special cases simply to protect an assumption that no longer holds.
+
 ### 3. Model deep modules
 
 Describe the main modules as **deep modules** — a lot of capability behind a

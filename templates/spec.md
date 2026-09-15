@@ -25,6 +25,8 @@ Prioritized (P1 = must, P2 = should, P3 = nice). Each is independently valuable.
 ## Requirements
 
 Functional and non-functional. Number them so the plan and review can cite them.
+Include important invariants/prohibitions as explicit requirements, not implicit
+assumptions. Keep IDs stable when refining wording.
 
 - **R1** — …
 - **R2** — …
@@ -35,6 +37,15 @@ How we'll *prove* it works. Each criterion is observable and testable.
 
 - **SC1** — <e.g. "duplicate invoices drop to zero across 1k webhook replays">
 - **SC2** — …
+
+## Decision scope
+
+Optional when meaningful choices exist; link existing ADRs rather than repeat
+them. These boundaries are approved with the spec, not inferred by an executor.
+
+- **Locked:** <decisions that must be honored, with stable references>
+- **Discretion:** <choices explicitly delegated within this scope>
+- **Deferred:** <ideas intentionally excluded; approving this spec does not authorize them>
 
 ## Out of scope
 

@@ -39,6 +39,10 @@ several, write several notes — don't stitch them together.
 Skim existing `solutions/` first. If this extends or corrects an existing note,
 update that one rather than adding a near-duplicate.
 
+For multi-phase work, use the plan's verified phase closures to find reusable
+decisions, failed assumptions, and guardrails. Do not promote an unverified
+worker narrative or stale execution checkpoint into project knowledge.
+
 ### 3. Write it to be found later
 
 Use the [solution template](../../templates/solution.md). Capture:
