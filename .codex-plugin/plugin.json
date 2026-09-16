@@ -1,6 +1,6 @@
 {
   "name": "devflow",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The compounding development loop for coding agents — align, spec, research, plan, build (TDD), verify, review, ship, and compound.",
   "author": {
     "name": "devflow contributors",
