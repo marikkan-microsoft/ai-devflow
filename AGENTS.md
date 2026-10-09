@@ -57,6 +57,7 @@ Map the user's intent to a skill and invoke it **before** acting:
 | UI work | `frontend-ui-engineering` |
 | "Is it actually done?" | `verify-before-done` |
 | Review a change before merge | `review-code` |
+| Concise, blunt, or angry review | `concise-review` |
 | Reduce complexity | `simplify-code` |
 | Security-sensitive change | `security-hardening` |
 | Performance concern | `performance-optimization` |

@@ -118,6 +118,7 @@ standalone:
 | Resume interrupted work | `/df resume <slug>` | `using-devflow` + `context-engineering` |
 | Debug a failure | `/df-debug` | `debug-root-cause` |
 | Review a diff | `/df-review` | `review-code` |
+| Get a blunt, concise review | `/df-concise-review` | `concise-review` |
 | Simplify code | `/df-simplify` | `simplify-code` |
 | Ship it | `/df-ship` | `ship-it` |
 | Resolve PR comments | `/df-pr` | `resolve-pr-feedback` |
@@ -126,6 +127,18 @@ standalone:
 Model-invoked skills (`test-driven-development`, `security-hardening`,
 `verify-before-done`, `browser-verification`, …) also activate automatically when
 the task fits — you rarely call them by hand.
+
+For a sharp report without praise or filler:
+
+```text
+/df-concise-review main...HEAD
+```
+
+`concise-review` keeps the same independent Spec and Standards axes as
+`review-code`, but reports a verdict followed by short, severity-ranked findings
+with locations, consequences, and fixes. It is read-only and targets defects,
+not people. Missing evidence produces an incomplete status, never an approval.
+Ordinary `/df-review` output is unchanged.
 
 ## Rewinding
 

@@ -65,7 +65,10 @@ splitting. Label every finding: **Critical** (block), **Important** (should fix)
 ### 5. Synthesize the verdict
 
 Merge both reports into one: **APPROVE** or **REQUEST CHANGES**. Any Critical means
-REQUEST CHANGES. Note what's done well — specific praise reinforces good patterns.
+REQUEST CHANGES. For an explicitly requested
+[concise-review](../concise-review/SKILL.md), apply its compact output format
+without rerunning reviewers. Otherwise, note what's done well — specific praise
+reinforces good patterns.
 
 ### 6. Route follow-ups
 

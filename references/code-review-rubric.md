@@ -35,7 +35,9 @@ Every Critical/Important finding carries a specific fix and a `file:line`.
 1. Merge both axis reports.
 2. Any Critical → **REQUEST CHANGES**; otherwise weigh Important findings.
 3. State one **verdict**: APPROVE | REQUEST CHANGES.
-4. Always name at least one thing done well — specific praise reinforces patterns.
+4. By default, name a specific strength. Explicit
+   [concise-review](../skills/concise-review/SKILL.md) requests omit praise and use
+   its compact format; review gates stay intact.
 5. Route blockers back through the build loop, or to `resolve-pr-feedback` for PRs.
 
 ## Reviewer norms

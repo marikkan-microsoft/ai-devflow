@@ -37,7 +37,7 @@ plugin.json        → Root manifest (Antigravity / generic)
   test-driven-development, api-and-interface-design, frontend-ui-engineering,
   context-engineering
 - **Verify:** verify-before-done, debug-root-cause, browser-verification
-- **Review:** review-code, simplify-code, security-hardening,
+- **Review:** review-code, concise-review, simplify-code, security-hardening,
   performance-optimization
 - **Ship:** git-workflow, ship-it, resolve-pr-feedback
 - **Compound:** compound-learnings

@@ -1,6 +1,6 @@
 # Devflow skills catalog
 
-32 skills organized by phase of the loop. Each is a workflow with steps, an
+33 skills organized by phase of the loop. Each is a workflow with steps, an
 anti-rationalization table, red flags, and evidence-based exit criteria (see
 [skill anatomy](../docs/skill-anatomy.md)). Most are **model-invoked** (they
 activate automatically when the task fits); the three orchestrators are
@@ -65,6 +65,7 @@ adds no skill, persona, command, or required runtime.
 | Skill | Command | Purpose |
 | --- | --- | --- |
 | [review-code](review-code/SKILL.md) | `/df-review` | Two-axis review (spec + standards), parallel personas. |
+| [concise-review](concise-review/SKILL.md) | `/df-concise-review` | Opt-in blunt, compact findings; same review depth and gates, no praise or filler. |
 | [simplify-code](simplify-code/SKILL.md) | `/df-simplify` | Reduce complexity, preserve behavior (Chesterton's Fence). |
 | [security-hardening](security-hardening/SKILL.md) | — | OWASP Top 10 prevention; auth, secrets, dependencies. |
 | [performance-optimization](performance-optimization/SKILL.md) | — | Measure-first; target the real bottleneck. |
