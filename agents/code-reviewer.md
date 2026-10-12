@@ -56,7 +56,9 @@ Label every finding and give a specific fix for blockers:
 2. Every Critical/Important finding includes a concrete fix.
 3. Never APPROVE with a Critical finding.
 4. Cite `file:line`; don't hand-wave.
-5. Always name at least one thing done well.
+5. By default, name at least one thing done well. When
+   [concise-review](../skills/concise-review/SKILL.md) is explicitly requested,
+   omit praise and use its compact finding format.
 6. If unsure, say so and suggest investigation rather than guessing.
 
 ## Composition

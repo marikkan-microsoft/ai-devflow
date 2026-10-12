@@ -80,7 +80,7 @@ prompt files, and manual folder-copy install for each tool).
 
 ## What's inside
 
-- **32 skills** across `align → spec → research → plan → build → verify → review →
+- **33 skills** across `align → spec → research → plan → build → verify → review →
   ship → compound`, plus three orchestrators (`feature-workflow`, `fix-workflow`,
   `autopilot`). Full list: **[skills catalog](skills/README.md)**.
 - **6 personas** — one implementer, `software-engineer`, plus five reviewers:

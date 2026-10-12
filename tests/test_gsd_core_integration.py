@@ -25,6 +25,7 @@ COMMANDS = {
     "df-auto",
     "df-build",
     "df-compound",
+    "df-concise-review",
     "df-debug",
     "df-domain",
     "df-feature",
@@ -52,8 +53,12 @@ CONTRACT_FILES = (
     "templates/notes.md",
     "templates/spec.md",
     "templates/research.md",
+    "agents/code-reviewer.md",
     "agents/software-engineer.md",
+    "references/code-review-rubric.md",
     "references/definition-of-done.md",
+    "skills/concise-review/SKILL.md",
+    "skills/review-code/SKILL.md",
     "skills/write-spec/SKILL.md",
     "skills/research-codebase/SKILL.md",
     "skills/domain-modeling/SKILL.md",
@@ -93,8 +98,8 @@ class GsdCoreIntegrationTests(unittest.TestCase):
         self.assertIn("MIT", guide)
         self.assertIn("## What stays out", guide)
 
-    def test_catalog_personas_and_native_commands_remain_unchanged(self):
-        self.assertEqual(len(list(ROOT.glob("skills/*/SKILL.md"))), 32)
+    def test_catalog_personas_and_native_commands_match_inventory(self):
+        self.assertEqual(len(list(ROOT.glob("skills/*/SKILL.md"))), 33)
         self.assertEqual(len(list(ROOT.glob("agents/*.md"))), 6)
         for directory, suffix in (
             (".claude/commands", ".md"),
