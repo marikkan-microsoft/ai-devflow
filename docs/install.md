@@ -147,7 +147,7 @@ files are thin wrappers over it.
 
 Harnesses that support session hooks (e.g. Claude Code) can auto-inject the
 `using-devflow` router. The hook is wired in [`hooks/hooks.json`](../hooks/hooks.json)
-and runs [`hooks/session-start.sh`](../hooks/session-start.sh) (requires `jq`).
+and runs [`hooks/session-start.sh`](../hooks/session-start.sh).
 Native plugin installs pick this up automatically. Without it, skills still
 activate by description and via `/df-*` commands.
 
