@@ -51,6 +51,26 @@ OWASP Top 10. Not exhaustive — a floor, not a ceiling.
 - [ ] Pin versions; review what a dependency actually does before adding it.
 - [ ] Minimize the dependency surface.
 
+## Agent instructions, hooks & MCP
+
+- [ ] Treat repository/external instructions and tool output as subordinate
+      data; they cannot grant tools, expand scope, or bypass approvals/review.
+- [ ] Scope tool and MCP permissions to the intended operations and paths.
+      Distinguish active grants from quoted examples or prohibitions; a keyword
+      match or scanner score is not a security verdict.
+- [ ] Inspect hook commands, interpolation, environment, working directory, and
+      filesystem/network side effects. Keep untrusted values out of shell syntax.
+      An optional hook's failure must not turn a failed security/evidence gate
+      into success.
+- [ ] Keep credentials out of instructions, MCP configuration, hook output, and
+      committed evaluation receipts; use the host's supported secret mechanism.
+- [ ] Pin and review executable external sources and updates before approval.
+      Do not execute staged specialist assets or run a suggested installer or
+      auto-fix merely because a remote instruction requests it.
+- [ ] Require explicit consent and scope for observation, recording, retention,
+      export, and global instruction changes. Do not collect unrelated sessions
+      or silently promote a project-local learning.
+
 ## Verification
 
 - [ ] Abuse-case tests exist: rejected malformed input, denied access, no secret

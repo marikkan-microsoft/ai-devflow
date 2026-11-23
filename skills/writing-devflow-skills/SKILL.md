@@ -31,6 +31,11 @@ Before adding a skill, search the catalog. If an existing skill covers ~80% of t
 idea, **extend it** instead of adding a near-duplicate. A new skill needs a
 distinct trigger and a distinct process.
 
+For a refinement proposed by `compound-learnings`, inspect its current evidence,
+applicability, and counterexample, and obtain approval for the broader scope.
+A recurring project-specific pattern is not automatically a shared rule; keep
+it as a scoped note when the evidence does not generalize.
+
 ### 2. Choose the invocation axis
 
 Decide: is this a **model-invoked** discipline (auto-reachable when the task fits —
@@ -65,8 +70,16 @@ durable artifacts to known paths where relevant.
 
 ### 7. Test the trigger and the flow
 
-Sanity-check: given a matching request, would the description cause invocation?
-Given the skill, could a junior engineer follow it to the verified outcome?
+For behavioral changes, use the shared
+[skill evaluations](../../references/skill-evaluation.md): define a bounded
+capability/regression case and its observable criteria before editing, record
+the baseline, then exercise the affected candidate behavior. Inspect actual
+actions and artifacts, not just matching prose. Record unavailable host evidence
+as unverified; do not install a runner or launch unapproved repeat trials.
+
+Wording-only edits need the existing structural/link checks, not fresh agent
+runs. A matching request should still trigger the skill, and its process should
+remain followable to a verified outcome.
 
 ## Common Rationalizations
 
@@ -83,6 +96,7 @@ Given the skill, could a junior engineer follow it to the verified outcome?
 - Sections are prose to read, not steps to follow.
 - Rationalizations/Red Flags are generic platitudes.
 - Verification asks for confidence, not evidence.
+- A structural test or an agent's summary is presented as observed workflow behavior.
 
 ## Verification
 
@@ -91,3 +105,5 @@ Given the skill, could a junior engineer follow it to the verified outcome?
 - Triggers are concrete; the gap over existing skills is justified.
 - Rationalizations, Red Flags, and Verification are specific and evidence-based.
 - No duplicated content — siblings and references are linked.
+- Affected behavior has baseline/candidate receipts under the shared evaluation
+  procedure; structural checks and remaining human acceptance are explicit.

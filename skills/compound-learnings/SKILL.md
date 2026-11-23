@@ -39,6 +39,12 @@ several, write several notes — don't stitch them together.
 Skim existing `solutions/` first. If this extends or corrects an existing note,
 update that one rather than adding a near-duplicate.
 
+Check the lesson's applicability against the current task, code, and evidence.
+Reconcile contradictory or superseded notes before reuse; stale proof or a
+shared label does not make different domain contracts interchangeable. Older
+notes remain usable without migration: recover their scope from current evidence,
+not from the presence or absence of new metadata.
+
 For multi-phase work, use the plan's verified phase closures to find reusable
 decisions, failed assumptions, and guardrails. Do not promote an unverified
 worker narrative or stale execution checkpoint into project knowledge.
@@ -55,12 +61,28 @@ Use the [solution template](../../templates/solution.md). Capture:
 
 Give it searchable frontmatter (title, slug, date, tags, severity).
 
+Use the template's optional reuse/promotion section when scope or generalization
+needs clarification. Cite the checked revision/date and actual proof; do not
+relabel an unverified observation as a solved problem.
+
 ### 4. Make it discoverable
 
 Add the tags future-you would search. Cross-link related `solutions/` and ADRs so
 the knowledge base connects rather than fragments.
 
-### 5. Close the loop
+### 5. Propose reusable guidance
+
+When a verified lesson recurs, consider whether an existing skill or reference
+would benefit. Keep the note project-local by default; record applicability,
+recurring evidence, a counterexample, and the proposed target before broadening
+it. Recurrence or a confidence score is not approval.
+
+Make a proposal, not an automatic edit to shared skills or global instructions.
+Use `writing-devflow-skills` and the normal scope approval, verification, and
+review gates for an accepted refinement. If evidence does not generalize, keep
+the scoped note; do not generate a skill or collect other projects' histories.
+
+### 6. Close the loop
 
 The note is the payoff of the work. Confirm it's written before considering the
 task fully done.
@@ -80,6 +102,7 @@ task fully done.
 - A note describes the symptom but not the root cause or guardrail.
 - Multiple distinct learnings crammed into one entry.
 - The note has no tags and won't be found by search.
+- A local convention became shared guidance without current evidence and approval.
 
 ## Verification
 
@@ -87,3 +110,5 @@ task fully done.
   fix, recognition signs, and a guardrail.
 - It has searchable frontmatter/tags and links to related notes/ADRs.
 - Durable decisions were also recorded as ADRs where appropriate.
+- Reuse respects current applicability and contradictory evidence; any broader
+  guidance remains a reviewed proposal until explicitly approved.

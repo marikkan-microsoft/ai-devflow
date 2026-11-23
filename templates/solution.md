@@ -34,6 +34,18 @@ can jump straight here.
 The test, lint rule, type, assertion, or check added so this cannot silently
 regress. If none, say why.
 
+## Reuse & promotion (optional)
+
+Omit when the sections above already make these boundaries clear. Existing notes
+need no migration.
+
+- **Applies / does not apply:** the contexts and counterexample that bound reuse.
+- **Evidence:** current code/check receipt, checked revision or dirty state, and
+  date. Separate observed results from unavailable or stale proof.
+- **Promotion:** none by default. If a lesson recurs, name an existing
+  skill/reference, supporting occurrences, and the scope/approval still needed.
+  A proposal does not authorize shared or global instruction changes.
+
 ## Related
 
 Links to `adr/*.md`, other `solutions/*.md`, docs, or upstream issues.
