@@ -114,6 +114,48 @@ strongest, compatible idea from each and fuses them into one loop.
 | **spec-kit** | **`analyze-artifacts`** — a read-only, pre-build cross-artifact coverage & consistency gate — and a per-project **`constitution.md`** of binding principles, enforced in `review-code`. |
 | **GSD Core** | **Goal-backward proof**, tracer feedback before expansion, dependency/interface contracts, bounded task packets, reconciled checkpoints, and current acceptance evidence — through existing skills and artifacts, not a new runtime. |
 
+## Targeted ECC contributions
+
+[affaan-m/ECC](https://github.com/affaan-m/ECC) adds useful feedback and
+compatibility practices to those seven foundations. Research is pinned to
+[`4adeee6732a12d1540f49a4d50a38ce8c97f9a53`](https://github.com/affaan-m/ECC/commit/4adeee6732a12d1540f49a4d50a38ce8c97f9a53)
+(2026-11-20). ECC is [MIT-licensed, copyright 2026 Affaan Mustafa][ecc-license].
+These are independently written process adaptations; no upstream code, skill
+bodies, or bundled assets are vendored. Copies or substantial portions of its
+material must retain the copyright and permission notice.
+
+| ECC mechanism / source | Devflow adaptation |
+| --- | --- |
+| [Capability/regression evaluations, graders, and repeated-trial distinctions][ecc-evals] | One [behavior scorecard](../references/skill-evaluation.md), consumed by [skill authoring](../skills/writing-devflow-skills/SKILL.md) and [verification](../skills/verify-before-done/SKILL.md). Inspect actual actions/artifacts; keep structural checks and human acceptance separate. |
+| [Project-scoped evidence-backed learning][ecc-learning] and [reviewable promotion][ecc-promotion] | [Compounding](../skills/compound-learnings/SKILL.md) and the [solution template](../templates/solution.md) make applicability, contradictions, and proposed promotion explicit. Extend existing guidance only through normal approval/review; no confidence score grants authority. |
+| [Explicit host capability declarations][ecc-hosts] | The [installation matrix](install.md#capability-and-evidence-matrix) separates declared content, observed version/route behavior, and unverified hooks. A portable skill file is not proof of runtime parity. |
+| [Catalog validation workflow][ecc-validation] | [Minimal CI](../.github/workflows/validate.yml) runs Devflow's existing Python checks with read-only permissions and pinned actions. No upstream Node validation stack or warn-only contract defaults. |
+| [Agent-configuration security surfaces][ecc-security] | The existing [security checklist](../references/security-checklist.md) covers instruction authority, tool/MCP permissions, hooks, secrets, provenance, and recording consent. No external scanner or automatic fixes. |
+| [Phase-boundary compaction][ecc-compaction] | Already substantially covered by [execution checkpoints](../references/execution-checkpoints.md) and context engineering. Keep that contract; no extra hook, token counter, or state directory. |
+
+**What stays out:** ECC's automatic observers, instinct database, generated skill
+catalog, global promotion, hook-profile framework, model routing, telemetry,
+installers, and evaluation runtime. The inspected [candidate execution
+gate][ecc-gate] refuses execution; it is not a ready backend for Devflow. This
+does not imply that every ECC evaluation utility is disabled.
+
+**Evidence limits:** offline tests validate contracts and actual local hook
+output, not universal agent compliance. Native scenario observations are bounded
+by their fixture, loaded source, host/model, and permissions; missing evidence
+stays unverified. No measured reliability, token-saving, or speed claim is made.
+Hosted CI execution requires an authorized push/PR; a locally passing command
+does not certify the hosted job.
+
+[ecc-evals]: https://github.com/affaan-m/ECC/blob/4adeee6732a12d1540f49a4d50a38ce8c97f9a53/skills/eval-harness/SKILL.md#L29-L105
+[ecc-learning]: https://github.com/affaan-m/ECC/blob/4adeee6732a12d1540f49a4d50a38ce8c97f9a53/skills/continuous-learning-v2/SKILL.md#L26-L79
+[ecc-promotion]: https://github.com/affaan-m/ECC/blob/4adeee6732a12d1540f49a4d50a38ce8c97f9a53/skills/continuous-learning-v2/scripts/instinct-cli.py#L1617-L1765
+[ecc-hosts]: https://github.com/affaan-m/ECC/blob/4adeee6732a12d1540f49a4d50a38ce8c97f9a53/scripts/lib/harness-capabilities.js#L31-L168
+[ecc-validation]: https://github.com/affaan-m/ECC/blob/4adeee6732a12d1540f49a4d50a38ce8c97f9a53/.github/workflows/reusable-validate.yml#L12-L64
+[ecc-security]: https://github.com/affaan-m/ECC/blob/4adeee6732a12d1540f49a4d50a38ce8c97f9a53/skills/security-scan/SKILL.md#L10-L43
+[ecc-compaction]: https://github.com/affaan-m/ECC/blob/4adeee6732a12d1540f49a4d50a38ce8c97f9a53/skills/strategic-compact/SKILL.md#L78-L124
+[ecc-gate]: https://github.com/affaan-m/ECC/blob/4adeee6732a12d1540f49a4d50a38ce8c97f9a53/scripts/lib/eval-harness/gate.js#L189-L197
+[ecc-license]: https://github.com/affaan-m/ECC/blob/4adeee6732a12d1540f49a4d50a38ce8c97f9a53/LICENSE#L1-L21
+
 ## When to use Devflow vs an original
 
 - Want **one opinionated loop** that fuses alignment, durable artifacts,

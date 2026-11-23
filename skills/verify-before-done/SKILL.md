@@ -53,6 +53,12 @@ relevant failure behavior. Isolated test success is not cross-phase proof.
 Bind results to the checked revision and dirty-file context; inspect actual
 output rather than trusting an executor's completion narrative.
 
+For changed skill behavior, include the affected
+[behavior-evaluation receipts](../../references/skill-evaluation.md). Structural
+or catalog checks alone do not establish agent compliance. Missing native-host
+evidence remains unverified/blocked, and required human judgment remains
+human-needed; neither is a pass.
+
 ### 3. Check the criteria off explicitly
 
 Walk each acceptance criterion / success criterion and mark it met or not, with

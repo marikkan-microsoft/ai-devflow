@@ -22,6 +22,8 @@ point: solved problems become notes that make the next run smarter.
 > Devflow synthesizes seven excellent open-source systems into one opinionated
 > loop. See **[docs/comparison.md](docs/comparison.md)** for who does what and
 > what Devflow borrows from each.
+> Targeted [ECC](https://github.com/affaan-m/ECC) practices strengthen evaluation,
+> scoped learning, and capability reporting without adding its runtime.
 
 ---
 
@@ -61,6 +63,10 @@ prompt files, and manual folder-copy install for each tool).
   spec compliance, then code quality. *(inspired by superpowers)*
 - **Evidence, not vibes.** Every skill ends in a verification gate; nothing is
   "done" without proof. *(inspired by agent-skills)*
+- **Skill behavior, not just structure.** Contributor
+  [evaluation scorecards](references/skill-evaluation.md) distinguish real agent
+  actions from document checks; learning promotion stays scoped and reviewed.
+  *(adapted from [ECC](docs/comparison.md#targeted-ecc-contributions))*
 - **Checked before you build.** `analyze-artifacts` audits spec↔plan for coverage
   and consistency, and a per-project `constitution.md` holds binding principles —
   caught in the plan, not the pull request. *(inspired by Spec Kit)*
@@ -181,6 +187,13 @@ idea here resonates, read the original in full:
 - [obra/superpowers](https://github.com/obra/superpowers) — subagent-driven development and two-stage review.
 - [github/spec-kit](https://github.com/github/spec-kit) — spec-driven development; the pre-build cross-artifact `analyze-artifacts` gate and the project `constitution`.
 - [open-gsd/gsd-core](https://github.com/open-gsd/gsd-core) — goal-backward planning, tracer feedback, bounded task context, resumable execution, and current acceptance evidence. [Integration and provenance](docs/gsd-core.md).
+
+Additional credit goes to **[affaan-m/ECC](https://github.com/affaan-m/ECC)** by
+Affaan Mustafa (MIT): capability/regression evaluations, scoped learning
+promotion, host capability reporting, catalog checks, and agent-configuration
+review. These are independently adapted practices in existing Devflow owners,
+not an ECC installation or runtime dependency.
+[Pinned sources, adaptations, and exclusions](docs/comparison.md#targeted-ecc-contributions).
 
 Devflow also integrates with
 [github/awesome-copilot](https://github.com/github/awesome-copilot) as an
